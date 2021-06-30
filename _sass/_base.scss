@@ -4,6 +4,14 @@
 
 // Typography
 
+* {
+  font-family: "Alegreya Sans", sans-serif
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Gentium Book Basic", serif
+}
+
 p, h1, h2, h3, h4, h5, h6, em, div, span, strong {
   color: var(--global-text-color);
 }
@@ -53,7 +61,6 @@ a, table.table a {
   .address {
     margin-bottom: 5px;
     margin-top: 5px;
-    font-family: monospace;
     font-size: 1.2rem;
     p {
       display: inline-block;
