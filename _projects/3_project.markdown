@@ -1,79 +1,18 @@
 ---
 layout: page
-title: project 3
-description: a project that redirects to another website
+title: Hun
+description: A Hypertonal Language
 img: /assets/img/7.jpg
-redirect: https://unsplash.com
-importance: 3
-category: work
+importance: 4
 ---
+Access the (WIP) grammar [here](/assets/proj/hun.pdf).
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+Hun is a constructed language designed to be as atypical as possible while still having naturalistic features. For example, Hun is morphologically fusional, which is exceedingly common in natural language--but it also has four persons, telicity, and optional tense. Phonologically, its distinctive feature is its 49 tones, despite just having a simple (C)V(V)(C) structure with exceptionally common consonants and a three vowel system.
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+Hun has just 9 phonemes: \[p\], \[t\], \[k\], \[n\], \[h\], \[l\], \[u\], \[o\], \[a\]. It also has a (C)V(V)(C) syllable structure, where the coda is limited to \[n\] or \[l\]. In order to account for this very simple phonology, Hun has 49 tones--7 register and 42 contour. Each register tone represents a relative whole note in the Western Ionic scale (Do, Re, Mi, Fa, So, La, Ti). Thus, if an utterance began with Hun on C4 (261.63 Hz), all pitches would be relative to it (D4, E4, F4, G4, A4, B4, or X3 for some tones depending on the speaker). The meaning of the first word is deducted from context. Contour tones simply consist of rising and falling tones. The distance of this fall/rise can be up to 7 registers, and as few as 2. All contour tones start on one register, and can ascend or descend to the next pitch.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+In Hun, noun inflection is based on vowel harmony. In single syllable words, vowels cycle around [u] → [o] → [a], meaning that [a] takes the suffix of [u]. For example, in the root [tu<sup>7</sup>l,] the suffixes would all contain the vowel [o]. If there are many vowels, for example, as in [pu<sup>4↘3</sup>no<sup>6</sup>], the suffix would take [o], as [u] is the lowest tone, which then turns into [o]. Nouns are declined for four cases (nominative, accusative, instrumental, locative), with the accusative functioning somewhat as a catch-all case. With regards to pronouns, Hun features a *fourth person*, roughly translated as "one," so 
+1. la<sup>2</sup>p<sup>4↗5</sup> pa<sup>5</sup>no<sup>2</sup>u<sup>5↘3</sup> = 4.SG.NOM tool.SG.INST
+is translated "One with a tool".
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/1.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/3.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, *bled* for your project, and then... you reveal it's glory in the next row of images.
-
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
-
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/" target="_blank">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-```html
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-```
+The rest of Hun is still incomplete, but I hope to continue working on it.

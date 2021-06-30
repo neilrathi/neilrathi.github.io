@@ -1,78 +1,93 @@
 ---
 layout: page
-title: project 5
-description: a project with a background image
+title: classnotes
+description: Custom LaTeX Package for linguistics, math, and sciences
 img: /assets/img/1.jpg
-importance: 3
-category: fun
+importance: 2
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+You can access the package on GitHub [here](https://github.com/neilrathi/classnotes).
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+## About
+The `classnotes` package is a package for LaTeX2e which has pre-loaded packages, environments, and shorthand commands for a variety of fields including math, chemistry, and linguistics. It's useful for anyone who wants to create organized, clear lecture notes which can be easily used for review, and especially helpful for LiveTeXing during lectures. To see the package in use, check out the [classnotes.pdf](https://github.com/neilrathi/classnotes/blob/main/examples/classnotes.pdf) file in this repository. The rest of the readme is essentially documentation for all of the special commands and features.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+To install the package, follow standard procedure for installing a custom `.sty` file. If you're unsure how to do that, check out [this link](https://tex.stackexchange.com/questions/1137/where-do-i-place-my-own-sty-or-cls-files-to-make-them-available-to-all-my-te). After loading the package with `usepackage{classnotes}`, you should require minimal setup. Just create a title and author, and then begin your document.
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/1.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/3.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
+Feel free to use this package for any of your own personal use. If you can, it would be great to reference me as the creator.
 
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, *bled* for your project, and then... you reveal it's glory in the next row of images.
+You can pass in the `human`, `gara`, `transitional`, `dido`, `mech`, `sans`, and `cms` options to change the document font (the first five refer to their Vox-ATypI categories (Caelacanth, Garamond, Libertinus , TeX Gyre Schola, and Computer Concrete), sans is Latin Modern Sans, and cms is Computer Modern Sans). You can also pass in the `mathfont` option to have the math mode font match the rest of the text.
 
+Finally, you can use the `colors` option to make the document more colorful, with green, blue, purple, and red theorem boxes. This is ideal for less "formal" notes that can be easier to read, since the theorems are even more clearly separated from the text.
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
+## Features
+The package comes with pre-loaded packages and commands for math, CS, linguistics, and science.
 
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/" target="_blank">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-```html
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
+### Theorems
+The theorem boxes are created using `mdframed` and `thmtools`. They have a gray background and are generally grouped into three categories. To use one, you can say
+```latex
+\begin{thrm}[Title]
+    Content goes here.
+\end{thrm}
 ```
+**Theorem Style**
+* Theorems (`thrm`)
+* Equations (`eqn`)
+* Lemmas (`lemma`)
+* Corrolaries (`corr`)
+* Algorithms (`algo`)
+* Laws (`law`)
+* Diagrams (`diagram`)
+
+**Definition Style**
+* Definitions (`defn`)
+* Examples (`example`)
+
+**Comment Style**
+* Remarks (`remark`)
+* Hints (`hint`)
+* Questions (`question`)
+* Claims (`claim`)
+* Conjectures (`conj`)
+* Propositions (`prop`)
+
+**Proofs:** The `proof` environment is the same as the `amsthm` proof environment, but with a black square for the QED symbol. The `solution` environment is the same, but with *Solution.* instead of *Proof.* in the header. The package also has a two-column proof environment.
+
+### Math
+The pre-loaded packages are `amsmath`, `amssymb`, `amsthm`, `amsfonts`, `mathrsfs`, `mathtools`, and `xfrac`.
+
+**General:** The blackboard bold font use the abbreviation `\AA` for $$ \mathbb{A} $$, and the calligraphic font uses `\mcA` for $$ \mathcal{A} $$. The command `\phii` outputs $$ \varphi $$ (varphi), and `\eps` outputs $$ \epsilon $$.  Some additional generic commands include `\psub` ($$ \subseteq $$), `\qeq` ($$ \overset{?}{=} $$), `\p{}` (parenthesis with automatic resizing), `\floor`, `\ceil`, and `\bvec` (auto-sized delimiters--no more `\left\lfloor x \right\rfloor`), `\thus` ($$ \therefore $$), and `\isom` ($$ \simeq $$). The package also defines $$ \mathrm{argmin} $$ and $$ \mathrm{argmax} $$.
+
+**Trig:** `\sint` and `\sinx` output $$ \sin \theta $$ and $$ \sin x $$, respectively, and `\sinit` and `\sinix` output $$ \sin^{-1}\theta $$ and $$ \sin^{-1}x $$. The `\inv` command can replace `^{-1}`, and `\degr` is a quicker way to write $$ ^{\circ} $$. The package also has $$ \mathrm{cis} $$.
+
+**Logic:** `\nneg` for $$ \mathord{\sim} $$, `\is` for $$ \equiv $$, `\forA` for $$ \mathord{\forall} $$, and `\isE` for $$ \mathord{\exists} $$. There is also a `\xor` command ($$ \oplus $$).
+
+**Algebra and NT:** Algebra has `\Gal`, `\Syl`, `\Mat`, `\Hom`, and `\Aut`. For number theory, `\modop{a}{b}{c}` outputs $$ a \equiv b \pmod{c} $$. There is also $$ \mathrm{lcm} $$, as well as `\cycsum` and `\symsum` (and cycprod and symprod):
+
+$$ \sum_{\mathrm{cyc}}, \sum_{\mathrm{sym}}, \ldots $$
+
+### Computer Science
+The pre-loaded packages are `algorithm2e`, `listings`, and `stmaryrd`, as well as the TikZ libraries `automata`, `positioning`, and `arrows`. The only additional commands as `\defas` ($$ \coloneqq $$) `\setto` (a more natural $$ \leftarrow $$), and `\bigo` ($$ \mathcal{O} $$).
+
+**Listings:** There are three predefined listing styles--python, java, and C/C++. Use the commannd `\lststyle{a}` instead of `\lstset{style = a}`.
+
+### Linguistics
+The pre-loaded packages are `tipa`, `phonrule`, `tikz-dependency`, `forest`, `ot-tableau`, and `linguex`. For phonology, the `\ipa{}` command is the same as `\textipa{}`. The `\ips` and `\ipb` commands automatically place **s**lashes or **b**rackets around the string. `\up` can replace `\super`.
+
+The commands `\phonss`, `\phonsb`, `\phonbs`, and `\phonbb` are all for phonological rules. For example, `\phonsb{p}{p\up h}{C_}` returns $$ \mathrm{/p/} $\to$ [\mathrm{p}^\mathrm{h}] / \mathrm{C\_}}.
+
+For semantics, the `\lb{}` command places math environment brackets around the input, so it can be easily used when creating semantics tees. The `\lam` command can replace $$ \lambda $$ without switching to math mode. For denotations, `\denot[]{}` puts double brackets around the argument, so `\denot[a]{Alice}` is $$ [[\mathrm{Alice}]]^{a} $$. `\denotree` does the same, but for tree diagrams.
+
+The package also loads `bussproofs` (for natural-deduction proofs) and `frege` (for *Begriffsschrift*).
+
+### Natural Sciences
+The pre-loaded packages are `chemfig` and `mhchem` for chemistry, `physics`, `tensor`, and `circuitikz` for physics, and `siunitx` for units. The `\unt{}` command allows for units to be boxed and typed easily in math mode. In addition, the following non-SI units are provided:
+* mile (`\mile`)
+* yd (`\yard`)
+* ft (`\foot`)
+* in (`\inch`)
+* lb (`\pound`)
+* °F (`\far`)
+* c (`\calo`)
+* C (`\Calo`)
+* atm (`\atm`)
+* gal (`\gallon`)

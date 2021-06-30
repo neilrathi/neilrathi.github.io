@@ -1,78 +1,17 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image
+title: Likna
+description: An International Auxiliary Language
 img: /assets/img/3.jpg
-importance: 2
-category: work
+importance: 5
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+Access the grammar [here](/assets/proj/likna.pdf).
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+Likna is an International Auxiliary Language (IAL) designed to be compatible with Ethnologue's top 20 most spoken languages. I was inspired to create it after watching the Conlang Critic series on YouTube, which, for every IAL reviewed, determined how many of the most spoken languages were compatible with the conlangs phonology. For most languages, this figure was around 4 or 5.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+Likna stemmed out of phonological compatibility. I began with the phonological inventory of English, and then determined the intersection of this inventory with Mandarin. Immediately, I had to remove voicing distinctions in all consonants, as well as the frictatives \[θ\] and \[ð\]. This process continued until I reached language \#20 (Korean), ending with a grand total of 12 consonants and 3 vowels. In order to keep this relatively usable, I condensed many sounds together. For example, \[ts\], \[tʃ\], \[tʂ\], \[dz\], \[dʒ\], \[tç\] were all considered to be *one* consonant.
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/1.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/3.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
+Even though I started with phonology, I decided to extend the idea of "compatability" to other parts of the language. Morphologically, the language is isolating, as isolation bears some similarity to agglutination making it more "compatible." There are no gender distinctions outside of pronouns, nominal morphology is limited to a plural morpheme (-is) and a slightly inflected article (az/am), and syntactically, the speaker has a choice of being "modifier-final" or "-initial."
 
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, *bled* for your project, and then... you reveal it's glory in the next row of images.
-
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
-
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/" target="_blank">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-```html
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-```
+As you might expect, this became very boring very quickly. Likna isn't an interesting conlang in any regard, because it's effectively impossible to make a "compatible" language an interesting one.
