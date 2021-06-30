@@ -1,0 +1,1318 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[transitional, mathfont, colors]{classnotes}
+\usepackage{cancel}
+
+\newcommand{\important}{$\blacktriangleright\,$}
+
+\title{Analysis Study Guide}
+\author{Neil Rathi}
+\date{for 2020 - 2021}
+
+% triangular numbers
+\newlength\radius
+\pgfmathsetlength{\radius}{0.25cm}
+%
+\newcommand\drawballs[2][]{%
+	\foreach \y [evaluate=\y as \yy using #2+1-\y] in {1,...,#2} {%
+		\foreach \x in {1,...,\yy} {%
+			\shade[shading=ball,ball color=white,#1] 
+				({(2*\x-2+\y)*\radius},{sqrt(3)*\y*\radius})
+				circle (\radius); 
+    		};
+	}%
+}
+\definecolor{bkgGreen}{RGB}{244, 249, 243}
+\definecolor{bordGreen}{RGB}{36, 139, 33}
+
+\begin{document}
+\lststyle{javastyle}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+This guide should serve as an introduction to the material covered in Analysis Honors at Paly, as well as some problem solving methods. Analysis is known to be a hard class, but I want to stress that it's difficulty is not because of it's material, but rather out of virtue of tests and quizzes. Quizzes are often much more difficult, focusing on understanding of material, rather than application of a formula. This guide will provide some practice problems, some created by me, and some from other sources such as college textbooks and math olympiads.
+
+I've also tried to emphasize two key parts of the Analysis syllabus. The first is an understanding of patterns, which is critical in the first few units. Finding a pattern is the key to answering a difficult problem, and is often what starts groundbreaking mathematical research. Take Fermat's last theorem, for example.
+
+\begin{thrm}
+    For all integers $x, y,z,$ and $n$, the equation
+    \[x^n + y^n = z^n\]
+    has no real solutions for all values of $n > 2$.
+\end{thrm}
+Fermat, a 17th century mathematician, noticed a pattern, and made this conjecture. However, it took a whopping 358 years to finally prove this theorem, leading to the second part of mathematics. At it's core, math is about rigorous \textit{proof}, which is what makes it so interesting. It's not just about reaching a solution, but instead about elegantly showing your work in a way that shows that you \textit{cannot} be wrong.
+
+Analysis works on proofs in most of what's covered, and this study guide has an extra focus on it, mainly because I think understanding where a theorem comes from is as important as knowing it. A big chunk of the class, as I already stated, is focused on applying the concepts that you learn, which you can't do unless you have a really strong foundation with each idea.
+
+\subsection{Notes on Notation}
+I use standard mathematical notation which you may not be familiar with just yet. Here's a rundown of the most important symbols:
+
+\medskip
+
+\begin{tabular}{l l l l l l}
+	$\ZZ$ & the integers & $\NN$ & the natural numbers & $\RR$ & the real numbers \\
+    $\CC$ & the complex numbers & $\PP$ & the prime numbers & $\varnothing$ & the empty set \\
+    $\forA$ & for all & $\isE$ & there exists & $\mid$ & such that \\
+	$\to$ & implies $(p \to q)$ & $\in$ & is an element of & $\Re, \Im$ & real and imaginary \\
+\end{tabular}
+
+\medskip
+
+\noindent Therefore, we can write something like
+\[\forA x \in \QQ, \isE y \in \ZZ \mid xy \in \ZZ\]
+which would mean
+\begin{center}
+	For all rational numbers $x$, there is an integer $y$ such that $xy$ is an integer.
+\end{center}
+
+\subsection{Problem Sets}
+Problem sets are given at the end of each section, roughly in ascending order of difficulty. You should at least attempt each problem, but do not be discouraged if you cannot solve it. I've labeled each problem with a sort of ``difficulty marking", which can be seen as follows.
+
+\begin{center}
+    \fbox{\parbox{0.715\textwidth}{
+    \begin{tabular}{llll}
+        \multicolumn{2}{l}{Problem Indicators:} &  0 & Very easy, quickly solvable \\
+        & & 10 & Easy, homework difficulty \\
+        & & 20 & Average, short answer difficulty \\
+        HM & Higher Math & 30 & Hard, free response difficulty \\
+        CS & Computer Science & 40 & Very hard, olympiad difficulty \\
+        $\blacktriangleright$ & Important & 50 & Unsolved problem
+    \end{tabular}
+    }}
+\end{center}
+
+The higher math problems require math concepts we haven't covered in class yet, but you may have learned them (either on your own or in previous classes). For example, problems which require functions will always be marked as \textit{HM} until unit 4 (functions). CS Application problems usually involve algorithm design ideas, and they can be interesting especially if you're taking a CS class. Finally, ``important" questions are ones to definitely attempt, since they're popular on quizzes and tests.
+
+\subsection*{Sample Problem Set}
+
+\begin{problem}[\important 00]
+    What would (CS30) mean?
+\end{problem}
+\begin{problem}[10]
+    Show that in right triangle $ABC$, $a^2 + b^2 = c^2$.
+\end{problem}
+\begin{problem}[CS15]
+    Find \textit{SUM} in terms of $N$ from the following algorithm.
+    \begin{algo}[Double Sum to $N$]
+    \textbf{Input:} $N$, \textbf{Output:} $S$
+    \begin{algorithm}[H]
+    	DoubleSum$(a,b)$:
+    	
+    	$S \setto 0$
+    	\For{$i \setto 1$ \KwTo $N$}
+      	{
+        	\For{$j \setto 1$ \KwTo $i$}
+		  	{
+		    	$S \setto S + j$
+		  	}
+      	}
+	\end{algorithm}
+	\end{algo}
+\end{problem}
+\begin{problem}[HM/CS50]
+    Determine if all problems which can be quickly verified can be quickly solved. In other words, does $\vb{P} = \vb{NP}$?
+\end{problem}
+\begin{remark}
+    In this problem, $\vb{P}$ refers to polynomial time problems, and $\vb{NP}$ refers to nondeterministic polynomial time problems. Check out \url{https://www.youtube.com/watch?v=YX40hbAHx3s} for more.
+\end{remark}
+
+\begin{center}
+    
+\end{center}
+
+\newpage
+
+\section{Algebra Through Problem Solving}
+Algebra Through Problem Solving (ATPS) is the first unit in the course. Here we'll cover things like elementary number theory, combinatorics, and algebra.
+
+\subsection{Pascal's Triangle}
+
+Pascal's triangle is a useful tool to look at things such as \textit{binomial expansions}, \textit{combinations}, or \textit{series}. To get introduced to this, we'll start with the definition of a factorial.
+\begin{defn}
+	For positive integers $n$, $n!$ is defined as $n(n-1)(n-2)\dots3\times2\times1$.
+\end{defn}
+For example, $5! = 5 \times 4 \times 3 \times 2 \times 1 = 120$. Interestingly enough, we can say that $n! = n \times (n-1)!$, meaning that $5! = 5\times 4!$.
+
+Now we can go about explaining Pascal's triangle. Make sure you have a solid foundation with factorials!
+
+\[\begin{array}{ccccccccccc}
+  &    &    &    &    &  1 &    &    &    &    &   \cr
+  &    &    &    &  1 &    &  1 &    &    &    &   \cr
+  &    &    &  1 &    &  2 &    &  1 &    &    &   \cr
+  &    &  1 &    &  3 &    &  3 &    &  1 &    &   \cr
+  &  1 &    &  4 &    &  6 &    &  4 &    &  1 &   \cr
+1 &    &  5 &    & 10 &    & 10 &    &  5 &    & 1 \cr
+\end{array}\]
+
+\begin{question}
+    What patterns can you find in the triangle? Spend some time looking through and exploring it.
+\end{question}
+The first pattern we notice is that each term is the sum of the two terms above it. For example, taking the 3rd term of the 5th row, which has a value of 6, we take the two values above it (3 and 3), and add them.
+
+Terms in Pascals Triangle are represented by a notation called "choose notation". We let the "first row" be the row with two ones, and the "zeroth row" be the row with one one. We then go down from there, so that the row 1\quad 2\quad 1 is the second row. This is simple, the second row has a second term of 2, the third has a second term of 3, the fourth 4, etc. For saying the "nth" term in a row, we say that the first 1 is the 0th term, the second number is the 1st term, and so on. Therefore, we introduce choose notation as follows:
+
+\begin{defn}
+	$\binom{n}{k}$ (read as $n$ \textit{choose} $k$) refers to the $n$th row and $k$th term for all $n \geq k, n,k \in \mathbb{N}$.
+\end{defn}
+For example, referring to the triangle above,
+
+\[\binom{4}{2} = 6.\]
+The formula for this, which we call binomial notation, is
+
+\[\binom{n}{k}=\frac{n!}{(n-k)!k!}.\]
+We also know that each term in Pascals Triangle is equal to the sum of the two above it. Therefore,
+
+\begin{thrm}[Pascal's Rule]
+	For all $n,k > 0, \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$.
+\end{thrm}
+\begin{proof}
+	Proceeding by using the definition presented above,
+	\begin{align*}
+		\binom{n-1}{k-1} + \binom{n-1}{k} &= \frac{(n-1)!}{((n-1) - (k-1))!(k-1)!} + \frac{(n-1)!}{(n - k - 1)!k!} \\
+		&= \frac{(n-1)!}{(n - k)!(k-1)!} + \frac{(n-1)!}{(n - 1 - k)!k!}.
+	\end{align*}
+	We multiply the left fraction by $\frac{k}{k}$ and the right by $\frac{n-k}{n-k}$
+	\begin{align*}
+		&= \frac{(n-1)!k}{(n - k)!k!} + \frac{(n-1)!(n-k)}{(n - k)!k!}.
+	\end{align*}
+	Adding these, we find that
+	\begin{align*}
+		&= \frac{(n-1)!k+(n-1)!(n-k)}{(n-k)!k!} \\
+		&= \frac{(n-1)!(k+n-k)}{(n-k)!k!} \\
+		&= \frac{(n-1)!n}{(n-k)!k!} \\
+		&= \frac{n!}{(n-k)!k!} \\
+		&= \binom{n}{k}
+	\end{align*}
+	from definition 1, and we are done.
+\end{proof}
+
+\noindent Also, we see that Pascal's Triangle seems to be symmetric. Therefore,
+
+\begin{thrm}
+	For all $n,k > 0, \binom{n}{k} = \binom{n}{n-k}.$
+\end{thrm}
+\begin{question}
+    Can you prove Theorem 2.2?
+\end{question}
+Next, another pattern which arises is that of the \textit{binomial expansion}. This is an expansion of $(a+b)^n$, for integers $a, b$ and $n$.
+
+\begin{thrm}[Binomial Theorem]
+	For integers $a$ and $b$, and positive integer $n$, we can say that
+	\[(a+b)^n = \binom{n}{0}a^nb^0 + \binom{n}{1}a^{n-1}b^1 + \binom{n}{2}a^{n-2}b^2 + \dots + \binom{n}{n-1}a^1b^{n-1} + \binom{n}{n}a^0b^n.\]
+	Thus, the coefficients of each term in $(a+b)^n$ lines up with the $n$th row of Pascals Triangle.
+\end{thrm}
+The proof of this theorem will be explored in a later section, since we don't have the methods to prove it yet.
+
+The theorem says that for some two numbers, the power of their sum is given by the above expression. We can apply this to a few binomials.
+
+\[(a+b)^2 = a^2 + 2ab + b^2\]
+\[(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3\]
+Now, we can move on to problems. For these, I recommend using small cases in order to determine a pattern. For example
+
+\begin{example}
+	The sum of each term in the 47th row of Pascals Triangle can be written as $x^y$ where $x$ and $y$ are positive integers. Find $x + y$. \textit{Hint}: Test smaller cases first.
+\end{example}
+\begin{solution}
+    We look for a pattern
+    
+    \begin{align*}
+    	\binom{2}{0} + \binom{2}{1} + \binom{2}{2} = 1 + 2 + 1 &= 4 \\
+    	\binom{3}{0} + \binom{3}{1} + \binom{3}{2} + \binom{3}{3} = 1 + 3 + 3 + 1 &= 8 \\
+    	\binom{4}{0} + \binom{4}{1} + \binom{4}{2} + \binom{4}{3} + \binom{4}{4}= 1 + 4 + 6 + 4 + 1 &= 16
+    \end{align*}
+    and we find one! It seems to be that for the $n$th row of Pascal's Triangle, the sum of each row is $2^n$. Therefore, we can say that the sum of the $47$th row is $2^{47}$, so $x = 2$ and $y = 47$, and we have $2 + 47 = \boxed{49.}$
+\end{solution}
+
+\begin{remark} Note that just because we noticed a pattern, we cannot truly say that it works. In order to do this, we must write a formal, rigorous proof of the claim.
+\end{remark}
+
+\subsection*{Pascal's Triangle Problems}
+\begin{problem}[10]
+    Find $\binom{3}{3}+\binom{4}{3} + \binom{5}{3} + \dots + \binom{37}{3}$.
+\end{problem}
+\begin{problem}[15]
+    Expand $(x^4 + \frac{1}{3y^2})^4$ using the binomial theorem.
+\end{problem}
+\begin{problem}[\important 20]
+    What is the coefficient of the term with $x\cdot y^{15}\cdot z^{6}$ in the expansion of $\left(13x^{11}+7y^{5}+3z^{2}\right)^{17}$?
+    \begin{hint}
+        Group the terms to form a binomial.
+    \end{hint}
+\end{problem}
+\begin{problem}[25]
+    Prove that the sum of each element in the $n$th row is $2^n$. Then, find the sum of every other element of the row.
+    \begin{hint}
+        Choose values for $a$ and $b$ in the binomial expansion.
+    \end{hint}
+\end{problem}
+\begin{problem}[30]
+    Find the sum of the last three digits of $19^{92}$ (Mu Alpha Theta 1992).
+\end{problem}
+\begin{problem}[30]
+    Find the hundreds digit of $11^{2020}$ (Adapted from 2011 AMC 10B \#23).
+\end{problem}
+\begin{problem}[35]
+    Find, with rigorous proof, a formula for the $n$th digit of all $11^n$.
+\end{problem}
+\begin{problem}[\important 30]
+    Find the value of $n$ for which there exist three consecutive terms that are in a ratio of $3: 4: 5$ (1992 AIME \#4).
+\end{problem}
+
+\subsection{Fibonacci Sequence}
+The Fibonacci Sequence is another set of numbers which contain many hidden patterns (again). Originally, the sequence was devised as a way to determine the size of rabbit populations by Leonardo Bonacci in the 12th century.\footnote{Fibonacci comes from \textit{filius Bonacci}, or `son of Bonacci'. Also, he most definitely did not invent it - it was first attested by Pingala, an Indian mathematician and linguist in 450 B.C. See \url{https://www.sciencedirect.com/science/article/pii/0315086085900217} for more.} We define it as follows:
+
+\begin{defn}
+	Let $F_n$ be the $n$th Fibonacci number. Then, defining $F_1$ as 1, and $F_2$ as 1, we recursively define $F_n$ as 		$F_{n-1} + F_{n-2}$.
+\end{defn}
+For example, the fifth Fibonacci number is
+
+\[F_5 = F_4 + F_3 = F_3 + F_2 + F_2 + F_1 = F_2 + F_1 + F_2 + F_2 + F_1 =  5.\]
+As you can see, this process is slightly tedious, and gets far worse for larger numbers. We can write this in java as
+\begin{lstlisting}[language=Java, caption = fibby.java]
+public class fibby {
+	public int fibonacci(int n) {
+		// fibonacci(1) = 1, the recursive base
+		if (n <= 1)
+			return n;
+		// definition of fibonacci
+		else
+			return fibonacci(n-1) + fibonacci(n-2);
+	}
+}\end{lstlisting}
+
+Unfortunately, this runs in $\bigo(2^N)$ time, which is... very bad. However, we can find an exact answer for the $n$th Fibonacci using Binet's formula, below.
+
+\begin{thrm}[Binet's Formula]
+	The $n$th Fibonacci number can be found from \[F_n = \frac{\left(\frac{1+\sqrt 5}{2}\right)^n - \left(\frac{1 - \sqrt 5}{2}\right)^n}{\sqrt 5}\]
+\end{thrm}
+
+\begin{proof}
+Examine the quadratic equation
+\[x^2=x+1.\]
+We note that the roots of this quadratic are $\frac{1\pm\sqrt{5}}{2}$.
+
+\noindent Next, it is easy to verify that \[x^n=F_nx+F_{n-1}.\] Letting the roots be $\alpha=\frac{1+\sqrt 5}{2}$ and $\beta=\frac{1-\sqrt 5}{2},$ they must satisfy the equation above.
+
+\noindent Therefore,
+\[\alpha^n=F_n\alpha+F_{n-1}\] and \[\beta^n=F_n\beta+F_{n-1}.\]
+Subtracting the two equations, we have that
+\begin{align*}
+	\alpha^n-\beta^n &= F_n(\alpha-\beta)+F_{n-1}-F_{n-1} \\
+	\left(\frac{1+\sqrt 5}{2}\right)^n - \left(\frac{1-\sqrt 5}{2}\right)^n &= F_n \left(\frac{1+\sqrt 5}{2} - \frac{1-\sqrt 5}{2}\right) \\
+	F_n &= \frac{\left(\frac{1+\sqrt 5}{2}\right)^n - \left(\frac{1 - \sqrt 5}{2}\right)^n}{\sqrt 5}
+\end{align*}
+as was desired.
+\end{proof}
+
+\noindent We call the value $\frac{1 + \sqrt{5}}{2}$ the ``golden ratio", represented by the greek letter $\phi$ (spelled ``phi," pronounced ``fee"). It has some interesting properties, which we won't examine in this guide, but feel free to look them up for yourself!\footnote{Check out \url{https://en.wikipedia.org/wiki/Golden_ratio} for some good starting points.} Also, please do \textit{not} memorize Binet's Formula. It's pretty much useless, and will never show up on a test. One interesting property of $\varphi$, however, is that
+\[\lim_{n\rightarrow\infty} \frac{F_{n+1}}{F_n} = \varphi,\]
+which is interesting.\footnote{See \url{www.math.hawaii.edu/~pavel/fibonacci.pdf} for a proof using linear algebra.}
+
+Using the recursive algorithm for Fibonacci numbers (recursive means defined by itself), we can list out the first few numbers in the Fibonacci sequence. I'd recommend memorizing these.
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+	$n$ & 1 & 2 & 3 &4 & 5 & 7 & 8 & 9 & 10 \\
+	\hline
+	$F_n$ & 1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34
+\end{tabular}
+\end{center}
+Now, let's think about a few properties of the Fibonacci Sequence. The first one that obviously arises is:
+
+\begin{example}
+	Find the sum of the first $n$ Fibonacci numbers. That is, find 1 + 1 + 2 + 3 + ... + $F_n$.
+\end{example}
+As always, start with finding a pattern. Letting the sum be notated as $S_n$,
+
+\begin{align*}
+	S_1 = F_1 &= 1 \\
+	S_2 = F_1 + F_2 &= 2 \\
+	S_3 = F_1 + F_2 + F_3 &= 4 \\
+	S_4 = F_1 + F_2 + F_3 + F_4 &= 7 \\
+	S_5 = F_1 + F_2 + F_3 + F_4 + F_5 &= 12
+\end{align*}
+and it looks like we've found one. It seems that $S_1 = F_3 - 1, S_2 = F_4 - 1, S_3 = F_4 - 1,$ and so on. Therefore, we say
+
+\begin{prop}
+	The sum of $n$ Fibonacci numbers is $F_{n+2} - 1$.
+\end{prop}
+
+Remember, this is a conjecture, not a theorem, as we have not yet proved it to be true for \textit{all} real numbers $n$. We can now move on to some problem sets.
+
+Most Fibonacci problems, unlike other sections in the class, simply rely on memorizing formulas. There are, however, problems where you'll have to deduce a pattern on a test.
+
+Outside of these problems, come up with your own conjectures for other interesting Fibonacci patterns. Try to write proofs for them, and check if they hold against edge cases.
+
+\newpage
+
+\subsection*{Fibonacci Number Problems}
+\begin{problem}[\important 10]
+    Find the value of $\binom{10}{0} + \binom{9}{1} + \binom{8}{2} + \binom{29}{3} + \dots + \binom{5}{5}$.
+\end{problem}
+\begin{problem}[\important 20]
+    Given two positive integers $n$ and $k$, find the value of $F_{n+k}$ in the form of $F_aF_b+F_cF_d$
+\end{problem}
+\begin{problem}[15]
+    Find positive integers $p$ and $q$ such that $F_{2021}^2 - F_{2017}^2 = F_pF_q$
+\end{problem}
+\begin{problem}[30]
+    Find the infinite sum $\frac{1}{3} + \frac{1}{9} + \frac{2}{27} + \cdots + \frac{F_n}{3^n} + \cdots$ (Mandelbrot).
+\end{problem}
+\begin{problem}[35]
+    Find a positive integer $a$ such that $x^2 - x - 1$ is a factor of $ax^{17} + bx^{16} + 1$ (1988 AIME \#13).
+\end{problem}
+
+\subsection{Factorials!}
+The last part of this unit is factorials. We've already briefly covered them, so here's a more formal definition.
+
+\begin{defn}
+	$n!$ is the product of all natural numbers $k$ such that $0 < k \leq n$. In other words, $n! = n(n-1)(n-2)...3\times2\times1,$ and we let $0! = 1$.
+\end{defn}
+There aren't many theorems concerning factorials at this level, so we'll dive straight into an example.
+
+\begin{example}
+	Evaluate $1!(1) + 2!(2) + 3!(3) + ... + 17!(17),$ then find a compact expression for $n$ numbers.
+\end{example}
+\begin{solution} As always, we look for a pattern:
+\begin{align*}
+	1!(1) = 1(1) &= 1 \\
+	1!(1) + 2!(2) = 1 + 4 &= 5 \\
+	1!(1) + 2!(2) + 3!(3) = 1 + 4  + 18 &= 23 \\
+	1!(1) + 2!(2) + 3!(3) + 4!(4) = 1 + 4  + 18 + 96 &= 119
+\end{align*}
+and we find that our value is always $(n+1)! - 1$, so for $n=17$, our sum is $\boxed{18!-1}.$
+\end{solution}
+
+\begin{thrm}
+	For all positive integers $n$, the sum $1!(1) + 2!(2) + 3!(3) + 4!(4) + ... + n!(n) = (n+1)! - 1$.
+\end{thrm}
+This proof will be explored in one of the coming sections, but for now, take it to be true. Now, it's time to solve some problems.
+
+\subsection*{Factorial Problems}
+
+\begin{problem}[15]
+    Determine the value of $\frac{1}{2!} + \frac{2}{3!} + \frac{3}{4!} + \dots + \frac{n}{(n+1)!}.$
+\end{problem}
+\begin{problem}[20]
+    Find the units digit of $(1!)^2 + (2!)^2 + (3!)^2 + ... + (100!)^2$ (2007 iTest).
+\end{problem}
+\begin{problem}[25]
+    Given that $\frac{((3!)!)!}{3!} = k \times n!$ where $k$ and $n$ are positive integers and $n$ is as large as possible, find $k+n$ (2003 AIME \#1).
+\end{problem}
+
+\subsection{ATPS Review Problems}
+\begin{problem}[5]
+    Explain why the statement $n!m! = (nm)!$ is false. Give a counterexample to support your reasoning.
+\end{problem}
+\begin{problem}[10]
+    Simplify $\frac{\binom{n+1}{m-1}}{\frac{n}{m}}$.
+\end{problem}
+\begin{problem}[15]
+    Determine the value of $n$ such that one term of $(1 + \frac{a}{n})^n$ is $\frac{99}{100}a^4$.
+\end{problem}
+\begin{problem}[25]
+    Using only one factorial symbol, derive a compact expression for the expression below. Recall that $(n+1)! - n! = n!\cdot n, (n+2)! - n! = n!\cdot(n^2 +3n+1)$ and $(n+3)! - n! = n! \cdot (n^3+6n^2 +11n+5)$.
+    \[3!(19)+5!(41)+7!(71)+9!(109)+\dots+(2m+1)!(4m^2 +10m+5)\]
+\end{problem}
+\begin{problem}[25]
+    Find the value of $\binom{99}{0} - \binom{99}{2} + \binom{99}{4} - \dots - \binom{99}{98},$ and then prove this for all odd numbers $n$ for the alternating sum of $\binom{n}{0}$ to $\binom{n}{n-1}$.
+\end{problem}
+\begin{problem}[35]
+    Given that the hypotenuse of a right triangle has side length $F_{n}$, find the lengths of each leg in terms of the Fibonacci Sequence.
+\end{problem}
+\begin{problem}[40]
+    Find $\tan(8x)$ in terms of $\tan(x)$.
+    \begin{hint}
+        Use smaller cases to find a pattern (keep the unit we're on in mind as well).
+    \end{hint}
+\end{problem}
+\begin{problem}[HM40]
+    Prove and generalize your result from the previous problem for all values of $\tan(nx)$.
+    \begin{remark}
+        You may want to use Euler's Formula in your proof. It states that
+        \[e^{ix} = \cos(x) + i\sin(x) = \cis(x),\]
+        perhaps most famously represented as $e^{i\pi} = -1$, where $i = \sqrt{-1}$.
+    \end{remark}
+\end{problem}
+
+\newpage
+
+\section{Sequences and Series}
+Sequences and Series is the second unit in the course, but it still uses the ATPS book. Over the course of this section, we'll cover things like patterns, sums, and the concept of infinity.
+
+\subsection{Sequences}
+Throughout math, we see ``sequences", like $1,2,3,4,...$, the Fibonacci Sequence, or the sequence of prime numbers.
+
+\begin{defn}
+	A sequence is an ordered list of items which allows repetition.
+\end{defn}
+Therefore, the sequence $1,1,2,2,3,3,4,4$ is not the same as $4,4,3,3,2,2,1,1$. This differs from a set, since a sequence \textit{is ordered} and \textit{allows repetition}. In math, we're mostly concerned with sequences of numbers, so much so that we define two special types of series.
+
+\begin{defn}
+	An arithmetic sequence is a sequence in which each term, $a_n$, is separated by a constant common difference.
+\end{defn}
+
+For example, the sequence $1, 4, 7, 10, 13, ...$ is arithmetic, with a common difference of 3. We call this common difference $d \in \mathbb{R}.$ Therefore, $48, 31, 14, -3$ is a progression with difference $-17$.
+
+Let's try to find a compact expression for the $n$th term in an arithmetic sequence. First, look for a pattern. Let's start with the simple sequence $1, 2, 3, 4\dots$ with $a_1 = 1$ and $d = 1$.
+
+\begin{align*}
+	a_1 = 1 &= a_1 + 0 \\
+	a_2 = 1 + 1 = 2 &= a_1 + 1 \\
+	a_3 = 1 + 1 + 1 = 3 &= a_1 + 2 \\
+	a_4 = 1 + 1 + 1 + 1 = 4 &= a_1 + 3 \\
+\end{align*}
+A pattern is revealed! For the $n$th term, we simply add the difference multiplied by $n-1$ to the first term, giving us that $\boxed{a_n = a_1 + d(n-1)}$.
+
+\begin{thrm}
+	For an arithmetic sequence with common difference $d$, the $n$th term is given by $a_n = a_1 + d(n-1)$, where $a_1$ is the first term.
+\end{thrm}
+\begin{proof}
+	Start by indexing at $a_0$ instead of $1$. Then, the second number in the sequence becomes $a_0 + d$, from the definition of an arithmetic sequence. Next, the third number is $a_2 = a_1 + d$, which can be simplified into $a_0 + d + d = a_0 +2d$. This occurs recursively, giving us that $a_n = a_0 + nd$. However, we must adjust for the shifted index. Therefore, $n$ is replaced by $n-1$, giving us $a_n = a_1 + d(n-1),$ and we are done.
+\end{proof}
+\begin{remark}
+	As you just saw, proofs aren't always just algebraic manipulation. Instead, we can find an elegant solution like the one above, which just entails thinking about a problem in a new way.
+\end{remark}
+Now, we'll look at the other interesting type of sequence, called a geometric sequence.
+
+\begin{defn}
+	A geometric sequence is a sequence in which each term $a_n$ is separated by a constant common ratio.
+\end{defn}
+For example, the sequence $1, 3, 9, 27, ...$ is geometric, with a common ratio of 3. The ratio $r \in \mathbb{R}$ is common to all numbers, and can be negative or fractional. Now, as above, let's find a compact expression for a geometric sequence with ratio $r$. Start with looking for a pattern in the sequence $1, 2, 4, 8...$
+\begin{align*}
+	a_1 = 1 &= a_1 \times 2^0 \\
+	a_2 = 1 + 1 = 2 &= a_1 \times 2^{1} \\
+	a_3 = 1 + 1 + 2 = 4 &= a_1 \times 2^2 \\
+	a_4 = 1 + 1 + 2 +  4 = 8 &= a_1 \times 2^3 \\
+	a_n = 1 + 1 + 2 + 4 + 8 + ... &= \boxed{a_1 \times 2^{n-1}.}
+\end{align*}
+\begin{prop}
+	For a geometric sequence with common ratio $r$, the $n$th term is $a_n = a_1 \times r^{n-1}$.
+\end{prop}
+This proof will be an problem later on, but keep this claim in mind. Finally, let's consider some \textit{infinite} sequences that go on forever. In particular, we're interested in their end behavior.
+
+\begin{defn}
+	An infinite sequence $\mathcal{S}$ is said to diverge if, as $n \rightarrow \infty$, $\mathcal{S}$ approaches a constant value $\mathcal{L}$.
+\end{defn}
+This is also known as taking the \textit{limit} as $n$ approaches $\infty$, notated as $\lim\limits_{n\rightarrow\infty}\mathcal{S},$ which will be explored more in second semester. An example of a sequence that converges is the geometric sequence with ratio $\frac{1}{2}$. Let's look at what happens to $\mathcal{S}$ as we go on:
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|c|c}
+	$n$ & 1 & 2 & 3 &4 & 5 & 6 & 7 \\
+	\hline
+	$a_n$ & 1 & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ & $\frac{1}{16}$ & $\frac{1}{32}$ & $\frac{1}{64}$
+\end{tabular}
+\end{center}
+Every value gets smaller, slowly approaching $0$. In fact, that gives us the following theorem:
+\begin{thrm}
+	A geometric sequence converges to zero if and only if the common ratio has an absolute value less than 1.
+\end{thrm}
+\begin{proof}
+	Let $a_1$ be the first term, and $r$ be the ratio. Then, since $|r| < 1,$ $r$ can be written as $\frac{1}{k}$ for some real number $k$. Therefore, we take the limit as $n$ approaches infinity to find the ``infinite" term:
+	\[\lim_{n\rightarrow\infty} \frac{a_1}{k^{n-1}} = 0,\]
+	because as $n$ becomes very large, so will $k$, and therefore, $\mathcal{S}$ will become very small, approaching zero, and we are done.
+\end{proof}
+
+Sometimes, we are given sequences that are not arithmetic or geometric, and we must find if they converge or diverge.
+
+\begin{example}
+	Does $\dfrac{n^2 - 2n +1}{2n^2 - 3n + 1}$ converge? If it does, what does it converge to?
+\end{example}
+\begin{solution} We can break the fraction into more manageable parts. The easiest way to see if something converges is to get $n$ in the denominator, because then as $n$ gets very large, $\mathcal{S}$ gets very small. Therefore,
+\begin{align*}
+	\frac{n^2 - 2n +1}{2n^2 - 3n + 1} &= \frac{n^2 - 2n +1}{2n^2 - 3n + 1} \times \frac{\frac{1}{n^2}}{\frac{1}{n^2}} \\
+	&= \frac{\frac{n^2 }{n^2} - \frac{2n}{n^2} +\frac{1}{n^2}}{\frac{2n^2 }{n^2} - \frac{3n}{n^2} + \frac{1}{n^2}} \\
+	&= \frac{1 - \frac{2}{n} +\frac{1}{n^2}}{2 - \frac{3}{n} + \frac{1}{n^2}}.
+\end{align*}
+Since $n$ is very large, fractions with $n$ in the denominator can be canceled, giving us
+\begin{align*}
+	&= \frac{1 - \cancel{\frac{2}{n}} +\cancel{\frac{1}{n^2}}}{2 - \cancel{\frac{3}{n}} +\cancel{ \frac{1}{n^2}}} \\
+	&= \boxed{\frac{1}{2},}
+\end{align*}
+which is our answer.
+\end{solution}
+Honestly, these problems are just looking at the asymptotic behavior of the function. Any ``top heavy" function will diverge, any ``bottom heavy" function will converge to zero, and any ``balanced" function will converge to the ratio of the leading coefficients.
+
+Last of all (and least important) is the concept of an average. The arithmetic mean, is the average of $n$ numbers, and the geometric mean, is the $n$th root of the product of $n$ numbers.
+\[\text{a.m.} = \frac{a_1 +a_2 + a_3 + \dots + a_n}{n}\]
+\[\text{g.m} = \sqrt[n]{a_1\times a_2\times a_3\dots\times a_n}\]
+
+\subsection*{Sequences Problems}
+\begin{problem}[\important 00]
+    Which sequences, among arithmetic and geometric, converge? What do they converge to?
+\end{problem}
+\begin{problem}[10]
+    Does $\frac{2(1-n^2)}{(2n-1)^3}$ converge or diverge?
+\end{problem}
+\begin{problem}[\important 10]
+    Prove Proposition 3.1 (the $n$th number in a geometric sequence is $a_1 \times r^{n-1}$)
+\end{problem}
+\begin{problem}[15]
+    Prove that the natural log of each term of a geometric sequence is an arithmetic sequence.
+\end{problem}
+\begin{problem}[20]
+    The second term of a geometric sequence is 4 and the sixth term is 16. Find the fourth term if the ratio of consecutive terms is a real number (Mu Alpha Theta 1992).
+\end{problem}
+\begin{problem}[15]
+    Find $T_n$, the $n$th triangular number, as shown here.
+    \begin{center}
+	\begin{tikzpicture}
+		\drawballs{1}
+		\drawballs[xshift=1cm]{2}
+		\drawballs[xshift=2.5cm]{3}
+		\drawballs[xshift=4.5cm]{4}
+	\end{tikzpicture}
+\end{center}
+\end{problem}
+\begin{problem}[20]
+    Find the number of non-similar triangles which have angles whose degree measures are distinct positive integers in an arithmetic progression (2006 AMC 10A).
+\end{problem}
+\begin{problem}[25]
+    A sequence of three real numbers forms an arithmetic progression with a first term of 9. If 2 is added to the second term and 20 is added to the third term, the three resulting numbers form a geometric progression. What is the smallest possible value for the third term in the geometric progression? (2004 AMC 12A \#14).
+\end{problem}
+\begin{problem}[25]
+    Let $a<b<c$ be three integers such that $a,b,c$ is an arithmetic progression and $a,c,b$ is a geometric progression. Find the smallest possible value of $c$ (2014 AMC 12A \#14).
+\end{problem}
+
+\subsection{Series}
+Next, we're interested in the sums of each value in these sequences. These are called \textit{series}, the sum of each term in a sequence.
+
+\begin{thrm}
+	The finite sum $S_n$ of a finite arithmetic sequence with first term $a_1$ and common difference $d$ is $\frac{n(a_1+a_n)}{2}$ or $\frac{n(2a_1+d(n-1))}{2}$.
+\end{thrm}\begin{proof}
+	We can see that $a_n = a_1 + d(n-1)$, therefore giving us that
+	\[a_n + a_1 = 2a_1 + d(n-1).\]
+	Now, considering $a_2 + a_{n-1}$, we see that
+	\begin{align*}
+		a_2 + a_{n-1} &= a_1 + d + a_1 + d(n - 2) \\
+		&= 2a_1 + d(1 + n - 2) \\
+		&= 2a_1 + d(n-1) \\
+		&= a_1 + a_n.
+	\end{align*}
+	Doing the same with $a_k + a_{n-k+1}$ for some $k \in N$, we find that
+	\begin{align*}
+		a_k + a_{n-k+1} & = a_1 + d(k-1) + a_1 + d(n - k) \\
+		&= 2a_1 + d(k-1 + n - k) \\
+		&= 2a_1 + d(n-1) \\
+		&= a_1 + a_n.
+	\end{align*}
+	Considering the series, we find that there are $n$ numbers, and therefore $\frac{n}{2}$ pairs. Therefore, to find the sum, we simply multiply $a_1 + a_n$ by $\frac{n}{2}$, giving us
+	\begin{align*}
+		S_n &= \frac{n(a_1 + a_n)}{2},
+	\end{align*}
+	which, substituting our value for $a_n$ in terms of $a_1$ and $d$, gives us
+	\begin{align*}
+		&= \frac{n(2a_1 + d(n-1))}{2},
+	\end{align*}
+	as was desired.
+\end{proof}
+We can also find the sum of a geometric series.
+\begin{thrm}
+	The sum of a geometric sequence with first term $a_1$ and common ratio $r$ is $a_1\times\frac{r^n-1}{r-1}$.
+\end{thrm}
+\begin{proof}
+	The geometric series can expressed as follows:
+	\begin{align*}
+		a_1 + a_2 + a_3 + ... + a_n &= a_1 + a_1\times r + a_1\times r^2 + a_1\times r^3 + \dots + a_1\times r^{n-1} \\
+		&= a_1(1 + r + r^2 + r^3 + \dots + r^{n-1}).
+	\end{align*}
+	One fundamental identity of polynomial division is that $\frac{x^y - 1}{x - 1} = (x^{y-1} + x^{y-2} + \dots + x^2 + x + 1)$. Therefore, we can substitute, giving us
+	\begin{align*}
+		&= a_1\times\frac{r^n-1}{r-1},
+	\end{align*}
+	which was to be proved.
+\end{proof}
+
+This extends to the case of infinite sums as well. The proof of this next theorem is relatively straightforward, as you will see.
+
+\begin{thrm}
+	An infinite geometric series converges to $\frac{a_1}{1-r}$ if and only if $|r| < 1$.
+\end{thrm}
+\begin{proof}
+	Take the formula from above, $a_1\times\frac{r^n-1}{r-1}$. If we let $|r|$ be less than one, as $n$ gets larger, $r^n$ will get much smaller. Thus, as $n \rightarrow \infty$, $r^n \rightarrow 0$, meaning that our equation becomes $\frac{-a_1}{r-1},$ simplifying into $\frac{a_1}{1-r},$ which was to be proved.
+\end{proof}
+
+We can now create a helpful thought process to determine if something converges or diverges. An arithmetic sequence or series will never converge, but will always go to positive or negative infinity. A geometric sequence converges to zero if and only if $|r| < 1,$ and a geometric series converges to $\frac{a_1}{1-r}$ if and only if $|r| < 1$.
+
+Next, let's look at something called \textit{summation notation}. This notation is incredibly helpful for writing infinite sums in shorthand. For those who have programmed, summations are identical to for loops. We write the greek letter $\Sigma$ (sigma) to mean sum.
+
+\[\sum_{i=1}^n i = 1 + 2 + 3 + \dots + n\]
+There are three parts to the above expression. The $i=1$ directly below the sigma is our ``index," which is what we count. The $n$ above it is our upper bound, and the $i$ is what we're operating with. Essentially, we look at what $i$ is at first, in this case, 1. Then, we operate on $i$ as shown to the right of the sigma - in this case, the operation is just $i$, but it could be something like $2i, 3i - 4,$ or even $\sum\limits_{j=1}^i j$. Then, we add $1$ to $i$, such that $i=2$, and perform the operation again. We repeat this process until $i = n$, our upper bound. Lets look at another example:
+
+\[\sum_{k=1}^{17} (k!\times k)\]
+Evaluating this, we get $1!1 + 2!2+ 3!3 + \dots 17!17,$ which, from Theorem 10 (see last unit), is $18! - 1$. We can also use the index to mark subscripts, exponents, and various other important points. We can also replace the sigma with a capital pi ($\Pi$) to represent a product, such that
+
+\[\prod_{i=1}^n i = 1 \times 2 \times 3 \times \dots \times (n-1) \times n = n!\]
+Here are a few more examples.
+
+\[\sum_{j=0}^{10} (2j+1) = 1 + 3 + 5 + \dots + 21 \qquad\quad \sum_{i=0}^{21} F_i = F_1 + F_2 + \dots F_{21}\quad\qquad\sum_{k=0}^{\infty} \frac{1}{3^k} = 1 +\frac{1}{3} + \frac{1}{9} + \dots \]
+\[\sum_{j=1}^{10}\left(\sum_{k=0}^{10} k\right) = \underbrace{(1 + 2 + \dots + 10) + (1 + 2 + \dots + 10) + \dots + (1 + 2 + \dots + 10)}_{10 \text{ times}} = 550\]
+\[\sum_{j=1}^{10}\left(\sum_{k=0}^{j} k\right) = 1 + (1 + 2) + (1 + 2 +3) + \dots + (1 + 2 + \dots + 10) = 220\]
+Finally, let's move on to convergence and divergence in series. This is relatively simple.
+\begin{thrm}
+	An arithmetic series will always diverge.
+\end{thrm}
+\begin{proof}
+	Let the first term be $a_1$ and difference be $d$. Then, as $d$ is constant, the $n$th term is $a_1 + d(n-1)$. Taking the limit as $n$ approaches $\infty$, this becomes $a_1 + d\times\infty,$ which is extremely large. Therefore, the series must keep getting larger in magnitude, and it diverges.
+\end{proof}
+\section*{Series Problems}
+\begin{problem}[5]
+    Evaluate the following the sums.
+    \begin{enumerate}
+		\item $\sum\limits_{i=1}^{9} {\binom{10}{i}}$
+		\item $\sum\limits_{n=1}^{20} \sin(\frac{n\pi}{2})$
+		\item $\sum\limits_{k=1}^n (\frac{1}{k+1}-\frac{1}{k})$
+		\item $\sum\limits_{i=1}^{\infty} \frac{1}{i(i+1)}$
+	\end{enumerate}
+\end{problem}
+\begin{problem}[10]
+    A grocer makes a display of cans in which the top row has one can and each lower row has two more cans than the row above it. If the display contains $100$ cans, how many rows does it contain? (2004 AMC 12B \#8).
+\end{problem}
+\begin{problem}[20]
+    Let $a + ar_1 + ar_1^2 + ar_1^3 + \cdots$ and $a + ar_2 + ar_2^2 + ar_2^3 + \cdots$ be two different infinite geometric series of positive numbers with the same first term. The sum of the first series is $r_1$, and the sum of the second series is $r_2$. What is $r_1 + r_2$? (2009 AMC 12A \#17)
+\end{problem}
+\begin{problem}[20]
+    The sum of an infinite geometric series is a positive number $S$, and the second term in the series is $1$. What is the smallest possible value of $S?$ (2016 AMC 10B \#16).
+\end{problem}
+\begin{problem}[20]
+    An infinite geometric series has sum 2005. A new series, obtained by squaring each term of the original series, has 10 times the sum of the original series. The common ratio of the original series is $\frac{m}{n}$ where $m$ and $n$ are relatively prime integers. Find $m+n$ (2005 AIME II \#3).
+\end{problem}
+\begin{problem}[25]
+    The Fibonacci numbers $F_a, F_b,$ and $F_c$ form an arithmetic sequence. If $a + b + c = 2000$, find $a$ (1993 ARML Team Round \#10).
+\end{problem}
+\begin{problem}[35]
+    The increasing geometric sequence $x_{0},x_{1},x_{2},\ldots$ consists entirely of integral powers of $3.$ Given that \[\sum_{n=0}^{7}\log_{3}(x_{n}) = 308\]
+    {\centering and\par}
+    \[56 \leq \log_{3}\left ( \sum_{n=0}^{7}x_{n}\right ) \leq 57,\]
+    find the value of $\log_{3}(x_{14})$ (2007 AIME II \#12).
+\end{problem}
+\subsection{Sequences and Series Review Problems}
+\begin{problem}[10]
+    Find $1 + 2 + 4 + 5 +7 + 8 + \dots  + (3n-4) + (3n-2) + (3n-1)$ in terms of $n$.
+\end{problem}
+\begin{problem}[\important 15]
+    In an arithmetic sequence, $ma_m = na_n$. Prove that $a_{m+n} = 0$.
+\end{problem}
+\begin{problem}[\important 10]
+    Fill the blank and find $x$: \[\sum_{k=4}^{10} \frac{(k-1)^2}{k+2} = \sum_{k=10}^{x}\left(\phantom{\frac{(k-1)^2}{k+2}}\right)\]
+\end{problem}
+\begin{problem}[15]
+    Find, with proof, the sum of the first $n$ Triangular numbers $T_n$.
+\end{problem}
+\begin{problem}[25]
+    The terms of an arithmetic sequence add to $715$. The first term of the sequence is increased by $1$, the second term is increased by $3$, the third term is increased by $5$, and in general, the $k$th term is increased by the $k$th odd positive integer. The terms of the new sequence add to $836$. Find the sum of the first, last, and middle terms of the original sequence (2012 AIME I \#2).
+\end{problem}
+\begin{problem}[25]
+    A sequence of numbers $x_1, x_2, x_3,..., x_{100}$ has the property that, for every integer $k$ between $1$ and $100$, inclusive, the number $x_k$ is $k$ less than the sum of the other $99$ numbers. Find $x_{50}$ (2000 AIME I).
+\end{problem}
+\begin{problem}[25]
+    One hundred concentric circles with radii $1, 2, 3, \dots, 100$ are drawn in a plane. The interior of the circle of radius $1$ is colored red, and each region bounded by consecutive circles is colored either red or green, with no two adjacent regions the same color. The ratio of the total area of the green regions to the area of the circle of radius $100$ can be expressed as $m/n,$ where $m$ and $n$ are relatively prime positive integers. Find $m + n$ (2003 AIME I \#2).
+\end{problem}
+\begin{problem}[35]
+    There exists a unique strictly increasing sequence of nonnegative integers $a_1 < a_2 < … < a_k$ such that
+    \[\frac{2^{289}+1}{2^{17}+1} = 2^{a_1} + 2^{a_2} + … + 2^{a_k}.\]
+    What is $k?$ (2020 AMC 12A \#19).
+\end{problem}
+\begin{problem}[HM45]
+    Let $a_0<a_1<a_2<\cdots \quad$ be an infinite sequence of positive integers. Prove that there exists a unique integer $n\ge1$ such that
+    \[a_n<\frac{a_0+a_1+\cdots + a_n}{n}\le a_{n+1}\]
+    (2014 IMO \#1).
+    \begin{hint}
+        We define a function as \textit{monotonically} increasing over some interval if it only increases over that interval. For example, $\sin(x)$ is monotonically increasing over $[0,\frac{\pi}{2}],$ but it is not over the interval $[0, \pi]$. We can show this if $f(n) > f(n+1)$. If $f(0) > 0$ and $f$ is monotonically increasing, there exists a unique $N$ such that $f(N-1) > 0 \geq f(N)$.
+    \end{hint}
+\end{problem}
+\begin{problem}[HM50]
+    Prove that every non-trivial zero of the zeta function has a real part of $\frac{1}{2}$. The trivial zeroes are all zeroes for which $s$ is a negative even integer.
+    \begin{remark}
+        The zeta function is defined as
+        \[\zeta(s) = \sum_{n=0}^{\infty} \frac{1}{n^s}.\]
+    \end{remark}
+\end{problem}
+
+\newpage
+
+\section{Proofs and Probability}
+You've made it to unit 3! This unit finally switches to another textbook, and here we'll learn about proof by induction, probability, expected value, and combinatorics.
+
+\subsection{Induction}
+Proofs are \textit{the} single most important thing in math, since they let you actually state a fact \textit{as a fact}. In this section, we're learning about a type of proof called induction. It works like this:
+\begin{defn}[Induction]
+    Here, $k$ refers to some random constant in the domain.
+    \begin{enumerate}
+        \item Let the statement be expressed by a function $\mcP(n)$.
+        \item Establish a base case by evaluating $\mcP(0)$ (or whatever your lowest value is), and showing that it holds with the hypothesis.
+        \item (Inductive Hypothesis) Next, assume that $\mcP$ holds for some value called $k$.
+        \item With step 3 in mind, prove that $\mcP(k+1)$ holds, \textit{if} $\mcP(k)$ holds.
+    \end{enumerate}
+\end{defn}
+This is kind of abstract, so I'll use this as an example.
+\begin{thrm}
+	For all real numbers $n,$ the sum from $1$ to $n$ is equal to $\frac{n(n+1)}{2}$. In other words,
+	\[\sum_{i=0}^{n} i = \frac{n(n+1)}{2}.\]
+\end{thrm}
+\begin{proof}
+    Define $\mcP$ such that
+    \[\mcP(n): \sum_{i=0}^{n} i = \frac{n(n+1)}{2}.\]
+	We start with a base case of $1$.
+	\[\mathcal{P}(1) = \sum_{i=0}^1 i = 1 = \frac{1(1+1)}{2},\]
+	which holds true. Next, we assume that
+	\[\mathcal{P}(k) = \sum_{i=0}^k i = \frac{k(k+1)}{2},\]
+	for some constant $k$. Our goal is now to prove that
+	\[\mathcal{P}(k+1) = \sum_{i=0}^{k+1} i = \frac{(k+1)(k+ 1 + 1)}{2}\]
+	is true, given our above hypothesis. We do the following
+	\begin{align*}
+		 \sum_{i=0}^{k+1} i &= 1 + 2 + 3 + 4 + \dots + k + k + 1.
+	\end{align*}
+	However, we know that $1 + 2 + 3 + 4 + \dots  + k = \frac{k(k+1)}{2}$ from our hypothesis, which lets us plug our hypothesis in. Then,
+	\begin{align*}
+		 1 + 2 + 3 + 4 + \dots + k + k + 1 &= \mathcal{P}(k) + k + 1 \\
+		 &= \frac{k(k+1)}{2} + (k+1) \\
+		 &= \frac{k(k+1)}{2} + \frac{2(k+1)}{2}  \\
+		 &= \frac{(k+1)(k+2)}{2},
+	\end{align*}
+	and we are done by induction.
+\end{proof}
+
+Why does this work? Since we have proved that our function works for $1,$ this must be true. Next, since we proved that it works for $k+1$ given that $k$ is true, we can assume that $k = 1$. Then $k+1 = 2$ must be true, and thus $(k+1) + 1 = 3$ must be true, and so on. Therefore, it is true for all integers $\geq$ our base case.
+
+Why do we care? It seems pretty clear that a proof using direct methods is far simpler. However, looking at more complex proofs, this becomes much less obvious. Let's do another example.
+
+\begin{example}
+	Consider the sequence $a_0$, $a_1$, $a_2$, . . . defined by $a_0 = 3$ and $a_{n+1} = (a_n - 1)^2+1$. Find, with proof, a compact expression for $a_n$.
+\end{example}
+\begin{solution}
+    As always, proof starts with patterns. We find that
+    \begin{align*}
+    	a_0 = 3 &= 2^1 + 1 \\ a_1 = 5 &= 2^2 + 1 \\ a_2 = 17 &= 2^{4} + 1\\ a_3 = 257 &= 2^8 + 1\\ a_4 = 65537 &= 2^{16}+1,
+    \end{align*}
+    giving us that $\boxed{a_n = 2^{2^n} + 1}$ (fun fact, this is known as the $n^{th}$ Fermat number).
+\end{solution}
+\begin{prop}
+	The sequence defined above can be compactly described by $2^{2^n} + 1$.
+\end{prop}
+\begin{proof}
+	We use induction. As usual, we start with the base case, which is $n = 0$. This amounts to checking that $a_0$, which is defined to be 3, is equal to $2^{2^0} + 1$, which is also 3. Thus the base case holds.
+	
+	Next, we perform the inductive step. We assume that $a_k = 2^{2^k} + 1$, and we must prove that this implies that $a_{k+1} = 2^{2^{k+1}} + 1.$ We have
+	\begin{align*}
+		a_{k+1} &= (a_k -1)^2+1 \\
+		&= ((2^{2^k} +1) -1)^2 + 1 \\
+		&= (2^{2^k})^2 + 1 \\
+		&= 2^{2 \times 2^k} + 1 \\
+		&= 2^{2^{k+1}} + 1,
+	\end{align*}
+	as wished.
+\end{proof}
+
+\subsection*{Induction Problems}
+\begin{problem}[10]
+    Prove the conjecture for the sum of $n$ Fibonacci numbers.
+\end{problem}
+\begin{problem}[15]
+    Prove Theorem 2.5 using induction. That is, for all positive integers $n$,
+	\[\sum_{i=1}^n i!(i) = (n+1)! - 1.\]
+\end{problem}
+\begin{problem}[20]
+    Prove, using induction, that
+    \[\sum_{i=1}^n i^3 = \left(\sum_{j=0}^n j\right)^2 = \frac{n^2(n + 1)^2}{4}.\]
+\end{problem}
+\begin{problem}[\important 25]
+    Prove that for every integer $n \geq 0,$ $n^5 - n$ is a multiple of $5.$ 
+    \begin{hint}
+        Every multiple of 5 can be written as $5a$ for some constant $a \in \mathbb{Z}.$
+    \end{hint}
+\end{problem}
+\begin{problem}[25]
+    Prove Binet's Formula using Induction, which states that
+	\[F_n = \frac{\left(\frac{1+\sqrt 5}{2}\right)^n - \left(\frac{1 - \sqrt 5}{2}\right)^n}{\sqrt 5}.\]
+\end{problem}
+\begin{problem}[25]
+    The Tower of Hanoi is a puzzle in which you have $3$ pegs and $n$ disks stacked on the first peg, such that the largest disk is on the bottom, then the second largest, and so on. The goal of the game is to move all disks to the third peg in the same arrangement in the fewest moves possible. However, no disk can be stacked on top of a smaller disk. Find, with proof, the fewest moves possible in terms of $n$.
+\end{problem}
+\begin{problem}[\important 20]
+    Prove the binomial theorem.
+\end{problem}
+\begin{problem}[30]
+    Prove that
+	\[\prod_{j=1}^n \left(1 + \frac{1}{j^2}\right) \leq n+1.\]
+\end{problem}
+\begin{problem}[35]
+    Prove that $n! > 2^n$ for $n \geq 4.$
+\end{problem}
+
+\subsection{Sets and Basic Probability}
+Here we'll discuss some basic set theory, and then move on to foundational probability theory.
+\subsubsection*{Set Theory}
+Set theory discusses how we organize things into categories, and is foundational for learning probability.
+
+\begin{defn}
+	A \textit{set} is an unordered list of \textit{elements}. The universal set, $U,$ is the set of all elements being discussed.
+\end{defn}
+For example, let $A$ be the set $\{1,2,3,4\}.$ We say that $n(A)$ is $4,$ as there are $4$ elements in $A$. We can use the notation
+\[1 \in A\]
+to mean that $1$ is an element of $A$. If we let $U$ be all $x \in \mathbb{Z}^{+},$ we can also say that
+\[A \subseteq U,\]
+meaning that $A$ is a subset of $U,$ as all elements of $A$ are elements of $U$. In addition, we can say $A \subset U,$ meaning that $A$ is a \textit{proper} subset of $U,$ as it is a subset such that $A \neq U$. However, if we say $U$ is $\{x \mid x \in \mathbb{Z}^{+}, x \leq 4,\}$ we must say that $A \not\subset U,$ but we can still say $A \subseteq U.$
+\begin{defn}
+	The complement of a set, denoted by $A'$ or $A^{C},$ is the set of all elements in $U$ which are not in $A.$
+\end{defn}
+For example, letting $U$ be $\{1, 2, 3, 4, 5\},$ and $A$ be $\{1,2,3,4\},$ we say that $A'$ is $\{5\}.$ Furthermore, we define the \textit{empty set,} $\varnothing,$ to be the set which has no elements. In that respect, if $A = U,$ we have that $A' = \varnothing.$
+
+The elements of a set can be anything, including numbers, words, and even other sets. For example, we could have some set $T = \{5, \{2,\pi\}, \text{Boston}\},$ which would be a valid set. Indeed, there is a special kind of set, called a power set, which contains all subsets of a set. For example, if $A = \{1, 2, 3\},$ we have that
+\[\mathscr{P}(A) = \{\varnothing, \{1\}, \{2\}, \{3\}, \{1,2\}, \{2,3\}, \{1,3\} \{1,2,3\}\}\]
+We can also perform operations on sets, two of which we are interested in.
+\begin{defn}
+	The union $A \cup B$ of two sets $A$ and $B$ is the set of all objects that are elements of at least one of $A$ and $B$. That is, $A \cup B = \{x \mid x \in A \text{ or } x \in B\}.$
+\end{defn}
+Thus, $\{4,8,9\} \cup \{2,4,9,11\} = \{2,4,8,9,11\}$ (we do not list the 4 or 9 twice, as elements cannot be duplicated in a set).
+
+\begin{defn}
+	The intersection $A \cap B$ of two sets $A$ and $B$ is the set of all objects that are elements of both of $A$ and $B$. In other words, $A \cap B = \{x \;|\; x \in A \text{ and } x \in B\}.$
+\end{defn}
+For example, $\{3,5,9,11\} \cap \{2,5,8,11,13\} = \{5,11\}$.
+\begin{defn}
+	Two sets are mutually exclusive if and only if they have no intersection.
+\end{defn}
+We can also call two \textit{events} mutually exclusive. For example, take the flipping of a coin. There are two possible outcomes, heads and tails, which are mutually exclusive because they cannot both occur at once. If two sets are mutually exclusive, we can say
+\[A \cup B = A + B\]
+\[A \cap B = \varnothing.\]
+
+\noindent We can use Venn diagrams to determine what the intersection and union of multiple sets may be.
+\begin{example}
+	A survey of 100 people finds that 60 people own a car, 30 people own a house, and 20 people own both. How many people own a house or a car, but not both?
+\end{example}
+\begin{solution}
+    Let $C$ be the set of those who own a car, and $H$ be those who have a house. Then, $C \cap H$ is the set of people who own both. Since $n(C) = 60, n(H) = 30,$ and $n(C \cap H) = 20,$ we can find the number of people who own a house or a car without the intersection. This is the same as $(C \cap H)'$. We can use a Venn diagram:
+
+    \def\firstcircle{(0,0) circle (1.5cm)}
+    \def\secondcircle{(0:2cm) circle (1.5cm)}
+    
+    \colorlet{circle edge}{bordGreen}
+    \colorlet{circle area}{bkgGreen}
+    
+    \tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+        outline/.style={draw=circle edge, thick}}
+        
+    \begin{center}
+    \begin{tikzpicture}
+        \draw[filled, even odd rule] \firstcircle node {$C$}
+                                     \secondcircle node{$H$};
+        \node[anchor=south] at (current bounding box.north) {$({C \cap H})'$};
+    \end{tikzpicture}
+    \end{center}
+    This makes it obvious. If we add the two together, we have $C + H = 90$. This, however, overcounts for the middle region. If we subtract $C \cap H,$ we have the union of $C$ and $H$. Then, subtracting again from that, we have $(C \cap H)'$, which is what we wanted! Thus, $(C \cap H)' = 90 - 20 - 20 = \boxed{50.}$
+\end{solution}
+
+\noindent This actually gives us an interesting theorem, which we call \textit{the Union Rule}.
+\begin{thrm}[Union Rule]
+	The union $A \cup B$ of two sets $A$ and $B$ is equal to their sum minus their intersection, such that $A \cup B = A + B - (A \cap B)$.
+\end{thrm}
+See the above example for a proof.
+\begin{corr}[Intersection Rule]
+	The intersection $A \cap B$ of two sets $A$ and $B$ is equal to their sum minus their union, such that $A \cap B = A + B - (A \cup B)$.
+\end{corr}
+This comes as a result of the Union Rule. Next, the \textit{empty set}, denoted $\varnothing$, $\emptyset$, or $\{\},$ is the set of no elements. That is, we define $\varnothing$ as all sets such that $\not\exists a \in \varnothing.$
+
+\begin{defn}
+	The sets $A_1, A_2,...,A_n$ are \textit{mutually disjoint} if and only if $A_1 \cap A_2\cap...\cap A_n \equiv \varnothing.$
+\end{defn}
+For example, if $A = \{1, 2, 3, 4\}$ and $B = \{5, 6, 7, 8\}$, since $A \cap B = \varnothing,$ $A$ and $B$ are mutually disjoint. This is also true for infinite sets, so we can say $\mathbb{Z}^{+}$ is mutually disjoint with $\mathbb{R}^{-}$.
+
+\subsubsection*{Probability}
+With the notions of sets in mind, we can start discussing basic probability concepts.
+\begin{defn}
+	The probability $P$ of an event $A$, denoted $P(A)$, is equal to the ratio of the event space $\textbf{E}$ and sample space $\textbf{S}$, such that
+	\[P(A) = |\mathbf{E}_A|/|\mathbf{S}|.\]
+\end{defn}
+
+We'll define the sample space as the total \textit{possible} outcomes, and the event space as the outcomes which fit our constraints. We denote the size of the event space as $|\mathbf{E}|$. Going back to the flipping of a fair coin, our sample space is $\mathbf{S} = \{\text{heads, tails}\}$, so the size of the sample space is $|\mathbf{S}| = 2$. If I wanted to know $P($heads$)$, we can call the event space $\mathbf{E} = \{\text{heads}\},$ so $|\mathbf{E}| = 1$. Then, our probability is their ratio, $1/2$.
+
+This is a slightly complicated way of expressing a simple topic, but it helps to make things rigorous.
+
+\begin{example}
+    Two six-sided dice are rolled. Find the probability that their sum is between 4 and 6, inclusive.
+\end{example}
+\begin{solution}
+    First, our sample space is all possible configurations of the two dice. Let the die be in pairs, so that $(1,2)$ refers to a 1 on the first and a $2$ on the second. Then we have $\vb{S} = \{(1,1), (1,2), (1,3),...(2,1),(2,2),..., (6,5), (6,6)\}$. This gives $36$ possible configurations.
+    
+    Then, the event space is all configurations which match. Here, we want the sum to be 4, 5, or 6. In that case, we have $\mathbf{E}_4 = \{(1,3), (3,1), (2,2)\}$, $\mathbf{E}_5 = \{(1,4), (4,1), (2,3), (3,2)\}$, $\mathbf{E}_6 = \{(1,5), (5,1), (2,4), (4,2), (3, 3)\}$. Therefore, $|\mathbf{E}| = \Sigma |\mathbf{E}_x| = 12$. Thus, we have that the overall probability is $P = 12/36 = 1/3 = 33.333\%$.
+\end{solution}
+
+\noindent Finally, there are some basic probability rules we should discuss.
+
+\begin{defn}
+    Two events are \textit{independent} if the occurrence of one does not influence the other.
+\end{defn}
+
+For example, flipping two coins is an example of two independent events. On the other hand, drawing two cards without replacing the first is an example of two \textit{dependent} events.
+
+\begin{thrm}[Probability Rules]
+    The probability of two independent events, $A$ and $B$, both occurring is
+    \[P(A \cap B) = P(A)\times P(B).\]
+    The probability of one of two independent events, $A$ or $B$, is
+    \[P(A \cup B) = P(A) + P(B).\]
+\end{thrm}
+\begin{example}
+    What is the probability that, on rolling $2$ die, the first is a 6, and the second is odd?
+\end{example}
+\begin{solution}
+    First, we need to realize that the events are independent. Then, we need to compute the probability of each. Let $A =$ six and $B =$ odd. Then,
+    \begin{align*}
+        P(A) &= \frac{1}{6} \\
+        P(B) &= \frac{3}{6} = \frac{1}{2},
+    \end{align*}
+    since $|\vb{S}| = 6,$ $|\vb{E}_A| = 1,$ and $|\vb{E}_B| = 3$. Then, we multiply their probabilities to find
+    \[P(A \cap B) = \frac{1 \cdot 1}{6 \cdot 2} = \boxed{\frac{1}{12}},\]
+    and we're done.
+\end{solution}
+
+\subsection*{Sets and Probability Problems}
+\begin{problem}[10]
+    Sets $A$ and $B$ have the same number of elements. Their union has $2007$ elements and their intersection has $1001$ elements. How many elements are in $A$?
+\end{problem}
+\begin{problem}[10]
+    How many subsets of $\{2,3,4,5,6,7,8,9\}$ contain at least one prime number? (2018 AMC 12B).
+\end{problem}
+\begin{problem}[25]
+    Let set $\mcA$ be a 90-element subset of $\{1,2,3,\dots,100\},$ and let $S$ be the sum of the elements of $\mcA.$ Find the number of possible values of $S.$ (2006 AIME I)
+\end{problem}
+\begin{problem}[25]
+    Let $S$ be a set of 6 integers taken from $\{1,2,\dots,12\}$ with the property that if $a$ and $b$ are elements of $S$ with $a<b$, then $b$ is not a multiple of $a$. What is the least possible value of an element in $S?$ (2018 AMC 10A)
+\end{problem}
+\begin{problem}[20]
+    Chloe chooses a real number at random from the interval $[0, 2017]$. Independently, Laurent chooses a real number at random from the interval $[0, 4034]$. What is the probability that Laurent's number is greater than Chloe's number? (2017 AMC 10A).
+\end{problem}
+\begin{problem}[20]
+    For a particular peculiar pair of dice, the probabilities of rolling $1$, $2$, $3$, $4$, $5$, and $6$, on each die are in the ratio $1:2:3:4:5:6$. What is the probability of rolling a total of $7$ on the two dice? (2006 AMC 10B).
+\end{problem}
+\begin{problem}[CS25]
+    Show that Quicksort has average time complexity $\bigo(n\log n)$, and worst case $\bigo(n^2)$.
+\end{problem}
+\begin{problem}[35]
+    Real numbers $x$ and $y$ are chosen independently and uniformly at random from the interval $(0,1)$. What is the probability that $\lfloor\log_2 x\rfloor=\lfloor\log_2 y\rfloor$, where $\lfloor r\rfloor$ denotes the greatest integer less than or equal to the real number $r$? (2017 AMC 12B).
+\end{problem}
+\begin{problem}[HM45]
+    Let $r \ge 2$ be a fixed positive integer, and let $\displaystyle F$ be an infinite family of sets, each of size $\displaystyle r$, no two of which are disjoint. Prove that there exists a set of size $\displaystyle r-1$ that meets each set in $\displaystyle F$. (2002 IMO Shortlist)
+\end{problem}
+\begin{problem}[HM50]
+    Assuming Zermelo-Fraenkel Axioms, let there be a function $f$ from $A$ to $B$. Assume that if $f$ is onto (a surjection), then a function $g$ from $B$ to $A$ is one to one (an injection). Prove (or disprove) that the Axiom of Choice holds.
+    \begin{remark}
+        ZF is a system of axioms, and ZFC is a contested version which includes the Axiom of Choice. See \url{https://projecteuclid.org/euclid.ndjfl/1093635502} to learn more.
+    \end{remark}
+\end{problem}
+
+\subsection{Bayes' Theorem}
+When we discuss probability, we also often need to discuss \textit{dependent} events. For example,
+\begin{example}
+    I draw a card out of a deck. Then, I draw a second card, without replacing the first. What's the probability that both are kings?
+\end{example}
+\begin{solution}
+    For this, we need to calculate the first probability. This is pretty obviously $\frac{4}{52},$ since there are $4$ kings in a deck. However, to calculate the probability of the second being a king, we need to figure out the new sample space and event space. Instead of $4$ and $52,$ if the first card was a king, then we have $|\vb{E}| = 3$ and $|\vb{S}| = 51$. This is because one card was drawn, and we're assuming that it was a king. Then,
+    \[P = \frac{3}{51}.\]
+    Thus, we have
+    \[P(\text{both}) = \frac{4 \cdot 3}{52 \cdot 51} = \frac{12}{2652} = \boxed{\frac{1}{221}},\]
+    so we're done.
+\end{solution}
+
+\noindent This gives us the important idea of \textit{conditional} probability.
+
+\begin{defn}[Conditional Probability]
+    The probability of $B$ \textit{given} $A$, notated $P(B\mid A)$, is the probability that $B$ will occur, given that $A$ occurred.
+\end{defn}
+So in Example 4.5, we have that $P(B \mid A) = \frac{3}{51}$, whereas $P(B) = \frac{4}{52}$. Essentially, $P(B \mid A)$ is the probability of $B$ if $A$ actually happened.
+
+From the above example, we also have that $P(\text{both}) = P(A)\times P(B \mid A)$. Thus,
+\begin{thrm}
+    For two dependent events, $A$ and $B$,
+    \[P(A \cap B) = P(A)\times P(B \mid A).\]
+\end{thrm}
+Finally, we can move on to the big theorem of this section.
+
+\begin{thrm}[Bayes' Theorem]
+    For two dependent events $A$ and $B$,
+    \[ P(A\mid B)={\frac {P(B\mid A)P(A)}{P(B)}}.\]
+\end{thrm}
+Bayes' Theorem allows us to express $P(A \mid B)$ in terms of $P(B \mid A),$ which is a crucial tool, as you'll see. Since most problems involving conditional probability typically have multiple ways of getting to one outcome, Bayes' Theorem condenses all of them into one total probability.
+
+\medskip
+
+\begin{proof}
+    We know that
+    \[P(A\cap B) = P(A)P(B\mid A),\]
+    and that
+    \[P(B\cap A) = P(B)P(A\mid B),\]
+    from Theorem 4.5. Then, we can equate these, giving
+    \[P(A)P(B\mid A) = P(B)P(A\mid B).\]
+    Therefore, we have
+    \[P(A\mid B)=\frac {P(B\mid A)P(A)}{P(B)},\]
+    and we are done.
+\end{proof}\footnote{See \url{https://www.youtube.com/watch?v=U_85TaXbeIo} for a simple geometric proof.}
+
+\medskip
+
+\noindent This also expands into
+
+\begin{corr}[Expanded Bayes]
+    For two dependent events $A$ and $B$,
+    \[P(A\mid B)={\frac {P(B\mid A)P(A)}{P(B\mid A)P(A)+P(B\mid A')P(A')}}.\]
+\end{corr}
+This proof is one of the problems for this section.
+
+The best way to solve these problems is through \textit{tree diagrams}. These essentially map out all of the possible outcomes.
+
+\begin{example}
+    $5.2\%$ of people who get tested have a certain virus. The test for this virus has a $3\%$ false negative rate, and a $98.4\%$ true negative rate. Find the probability that if I test positive, I have the virus.
+\end{example}
+\begin{solution}
+    To solve this, we can first use a tree. Let $V = $ I have the virus, $P =$ I test positive, and $N =$ I test negative. Then,
+    
+    \bigskip
+    
+    \begin{center}
+    \begin{forest}
+    [ [$V$ [$P$ ] [$N$ ] ] [$V'$ [$P$ ] [$N$ ] ] ]
+    \end{forest}
+    \end{center}
+    
+    \bigskip
+    
+    We then can assign our probabilities to these values:
+    
+    \bigskip
+    
+    \begin{center}
+    \begin{forest}
+    [ [{$V = 0.052$} [{$P$} ] [{$N = 0.03$} ] ] [{$V'$} [{$P$} ] [{$N = 0.984$} ] ] ]
+    \end{forest}
+    \end{center}
+    
+    \bigskip
+    
+    Finally, we can calculate the missing probabilities, since $P(A') = 1 - P(A)$.
+    
+    \bigskip
+    
+    \begin{center}
+    \begin{forest}
+    [ [{$V = 0.052$}  [{$P = 0.97$} ] [{$N = 0.03$} ] ] [{$V' = 0.948$} [{$P = 0.016$} ] [{$N = 0.984$} ] ] ]
+	\end{forest}
+    \end{center}
+    
+    \bigskip
+    
+    Now all that's left to do is apply Bayes' Theorem. Here, we'll use the expanded version. You'll notice that there are two possible ``routes" to get to \texttt{P} - through $V$ and through $V'$. We want to determine $P(V \mid P),$ which entails using Expanded Bayes.
+    \begin{align*}
+        P(V\mid P) &= \frac{P(P\mid V)P(V)}{P(P\mid V)P(V)+P(P\mid V')P(V')} \\
+        &= \frac{(0.97)(0.052)}{(0.97)(0.052) + (0.016)(0.948)} \\
+        &= \boxed{76.88\%},
+    \end{align*}
+    and we're done.
+\end{solution}
+
+You'll notice that I essentially multiplied up the tree with my preferred route, then divided by the sum of every possible route. That's why tree diagrams are so helpful.
+
+\subsection*{Bayes' Theorem Problems}
+\begin{problem}[00]
+    Watch \url{https://www.youtube.com/watch?v=HZGCoVF3YvM&vl=en}.
+\end{problem}
+\begin{problem}[\important 15]
+    A diagnostic test has a probability of 0.95 of giving a positive result to someone who has a certain disease, and a probability of 0.10 of giving a (false) positive when applied to someone who doesn't have it. It is estimated that 0.5\% of the population has the disease. What is the probability that...
+    \begin{enumerate}[label=(\alph*),noitemsep]
+        \item the test result will be positive
+        \item  that, given a positive result, the person has the disease
+        \item that, given a negative result, the person doesn't have the disease
+        \item that the person will be misclassified
+    \end{enumerate}
+\end{problem}
+\begin{problem}[15]
+    A natural language processing algorithm is trained on a dataset of 1000,000 phrases. Of these phrases, 103 are the word \texttt{play}. The phrase \texttt{the children went out to} occurs 33 times. The algorithm calculates that the probability of \texttt{play} after the phrase \texttt{the children went out to} is 96.9\%.
+    
+    The algorithm is given the word \texttt{play}. What is the probability that the preceding phrase is \texttt{the children went out to}?
+\end{problem}
+\begin{problem}[15]
+    Companies A, B, and C make 15\%, 40\%, and 45\%, respectively, of the major appliances sold in a certain area. 1\% of company A's, 1.5\% of B's, and 4\% of company C's appliances are defective. A defective item is randomly chosen. What is the probability of it being from each company?
+\end{problem}
+\begin{problem}[15]
+    Prove Corollary 4.7 (Expanded Bayes).
+\end{problem}
+\begin{problem}[20]
+    Balls numbered 1 through 20 are placed in a bag. Three balls are drawn out of the bag without replacement. What is the probability that all the balls have odd numbers on them?
+\end{problem}
+\begin{problem}[\important 35]
+    At a game show, you have three doors to pick from. One door has \$100,000 behind it, but the others have goats. You pick a door, say Door 1, and the host now opens another door, say Door 3, revealing a goat.
+    
+    He asks you if you want to switch doors to \#2. Is it to your advantage to switch your choice? Use Bayes' theorem to determine (This is known as the Monty Hall Problem).
+\end{problem}
+
+\subsection{Combinatorics}
+Combinatorics is the study of counting things, through grouping, sorting, and arranging them. It has multiple applications to computer science, game theory, and other fields, and is one of the most studied fields of math.
+
+\begin{thrm}[Multiplication Principle]
+    If there are $m_1$ ways to select an item, $m_2$ to select a second item, $m_3$ to select a third,...and $m_n$ ways to select the $n$th, there are
+    \[\prod_{i=1}^n m_i = m_1m_2m_3...m_n\]
+    different ways to make the sequence of choices.
+\end{thrm}
+So, for example
+\begin{example}
+    There are four colors and 3 sizes of shirts. How many possible shirts are there?
+\end{example}
+\begin{solution}
+    By the multiplication principle, there are $4 \times 3 = \boxed{12}$ possible combinations, since $m_1 = 4$ and $m_2 = 3$.
+\end{solution}
+
+\noindent We can also apply this to cases where we're asked to evaluate something `without repetition'. For example,
+\begin{example}
+    How many ways can 3 prizes be distributed to 11 competitors?
+\end{example}
+\begin{solution}
+    The first prize can be given in 11 ways, since there are 11 people. However, the second can only be given in 10, since someone already has first prize, and therefore can't have second. The third, then, can be distributed in 9 ways, giving us $11 \cdot 10 \cdot 9 = \boxed{990}$ total ways.
+\end{solution}
+
+In addition, we may want to consider the arrangement of items, both with repeated items, and without.
+
+\begin{thrm}
+    If there are no repeats, there are $n!$ ways to \textit{distinctly} arrange $n$ items. If there are repeats, there are
+    \[\frac{n!}{r_1!r_2!\dots r_k!}\]
+    ways to arrange $n$ items with $r_i$ repetitions of $i$.
+\end{thrm}
+\begin{proof}
+    We begin with the case of no repeats. Suppose there are $n$ ``slots" in which to place these items.
+    
+    Without loss of generality, we start with the first slot. Since there are $n$ items, there are $n$ total possible arrangements. For the second slot, there are now $n-1$ total combinations, since one item has been used for the second slot. Likewise, for the third, $n-2$, and so on. Thus, for the $k$th slot, there are $n-k+1$ combinations. From the multiplication principle we then have
+    \[\prod_{k=1}^{n} (n-k+1) = n!,\]
+    so we're done.
+    
+    For the case with repeats, suppose that we denote each repeated item with $A_i$. Suppose that we have $r_1$ repeats of $A$, $r_2$ repeats of $B$, and so on. WLOG, let all the $A$'s be placed together, all of the $B$'s, etc. We can represent the string of $A$'s with
+    \[A_1A_2A_3\dots A_{r_1}.\]
+    From our original case, there are $r_1!$ ways to arrange this. The same goes for $B$, $C$, and the rest. If they are not arranged together, the logic still holds. Thus, since there are $n!$ non-distinct arrangements, and $r_1!r_2!\dots r_k!$ ways to repeat (from the multiplication principle), we get
+    \[\frac{n!}{r_1!r_2!\dots r_k!},\]
+    which was to be proved.
+\end{proof}
+
+\begin{example}
+    How many ways can you arrange the letters in \texttt{MISSISSIPPI}?
+\end{example}
+\begin{solution}
+    There are 11 letters in \texttt{MISSISSIPPI}, giving us $11!$ nondistinct arrangements. Next, there are $4$ occurrences of \texttt{S}, 4 of \texttt{I}, and 2 of \texttt{P}. Thus, there are 
+    \[\frac{11!}{4!4!2!}\]
+    total arrangements of the word.
+\end{solution}
+
+\begin{defn}[Permutations]
+    When there are $n$ objects and $k$ ways to arrange them, there are
+    \[_nP_k = \frac{n!}{(n-k)!}\]
+    total possibilities. We use these when \textit{ordering matters}.
+\end{defn}
+\begin{remark}
+    This is often also written as $^nP_k,$ $P(n,k)$, or on calculators, \texttt{nPr}$(n,k)$.
+\end{remark}
+
+\begin{example}
+    Six people are arranged in a line. How many ways can they be arranged if...
+    \begin{enumerate}[noitemsep, topsep = 1pt]
+        \item There are no restrictions?
+        \item A has to be at the front?
+        \item B has to be at either end?
+        \item C has to be next to D?
+        \item E and F can't be next to each other?
+    \end{enumerate}
+\end{example}
+\begin{solution}
+    We'll take this piece by piece. Part 1 asks, essentially, to evaluate $_{6}P_{6},$ since there are $6$ spots and $6$ people. This gives
+    \[_{6}P_{5} = \frac{6!}{(6-6)!} = \boxed{6!}.\]
+    For part 2, we can effectively `fix' $A$ to the front - there is 1 way to do this. Then, we have $5$ spots left, which gives $5!$ arrangements, so we have $1 \times 5! = \boxed{5!}$.
+    
+    For part 3, there are two possible `good' outcomes. If we assume B is at the front, there are $5!$ permutations. If we assume B is at the end, there are another $5!$ permutations. Adding these gives us $\boxed{2 \times 5!}.$
+    
+    Parts 4 and 5 are left as exercises to the reader (I'm too lazy).
+\end{solution}
+
+Sometimes, however, we might experience \textit{overcounting.} For example,
+
+\begin{example}
+    There are 10 balls in a box. 6 are red, 4 are green. 
+\end{example}
+
+\subsection*{Combinatorics Problems}
+There are \textit{alot} of these. Since a lot of math competitions seem to love combinatorics, I've taken tons from the AMC, AIME, and USAMO series.
+
+\begin{problem}[\important 10]
+    How many ways can a student schedule 3 mathematics courses -- algebra, geometry, and number theory -- in a 6-period day if no two mathematics courses can be taken in consecutive periods? (What courses the student takes during the other 3 periods is of no concern here.) (2018 AMC 10A).
+\end{problem}
+\begin{problem}[15]
+    At a gathering of $30$ people, there are $20$ people who all know each other and $10$ people who know no one. People who know each other hug, and people who do not know each other shake hands. How many handshakes occur within the group? (2017 AMC 10A).
+\end{problem}
+\begin{problem}[\important 15]
+    How many rearrangements of $abcd$ are there in which no two adjacent letters are also adjacent letters in the alphabet? For example, no such rearrangements could include either $ab$ or $ba$. (2015 AMC 10A).
+\end{problem}
+\begin{problem}[20]
+    A list of $2018$ positive integers has a unique mode, which occurs exactly $10$ times. What is the least number of distinct values that can occur in the list? (2018 AMC 10B).
+\end{problem}
+\begin{problem}[20]
+    How many odd positive 3-digit integers are divisible by 3 but do not contain the digit 3? (2018 AMC 12B).
+\end{problem}
+\begin{problem}[25]
+    Call a positive integer \textit{monotonous} if it is a one-digit number or its digits, when read from left to right, form either a strictly increasing or a strictly decreasing sequence. For example, $3$, $23578$, and $987620$ are monotonous, but $88$, $7434$, and $23557$ are not. How many monotonous positive integers are there? (2017 AMC 10B).
+\end{problem}
+\begin{problem}[\important 25]
+    Alice refuses to sit next to either Bob or Carla. Derek refuses to sit next to Eric. How many ways are there for the five of them to sit in a row of $5$ chairs under these conditions? (2017 AMC 10A)
+\end{problem}
+\begin{problem}[30]
+    Eight people are sitting around a circular table, each holding a fair coin. All eight people flip their coins and those who flip heads stand while those who flip tails remain seated. What is the probability that no two adjacent people will stand? (2015 AMC 10A)
+\end{problem}
+\begin{problem}[30]
+    A scanning code consists of a $7 \times 7$ grid of squares, with some of its squares colored black and the rest colored white. There must be at least one square of each color in this grid of $49$ squares. A scanning code is called \textit{symmetric} if its look does not change when the entire square is rotated by a multiple of $90 ^{\circ}$ counterclockwise around its center, nor when it is reflected across a line joining opposite corners or a line joining midpoints of opposite sides. What is the total number of possible symmetric scanning codes? (2018 AMC 10A)
+\end{problem}
+\begin{problem}[30]
+    Six cards numbered $1$ through $6$ are to be lined up in a row. Find the number of arrangements of these six cards where one of the cards can be removed leaving the remaining five cards in either ascending or descending order. (2020 AIME I).
+\end{problem}
+\begin{problem}[35]
+    How many triangles with positive area have all their vertices at points $(i,j)$ in the coordinate plane, where $i$ and $j$ are integers between $1$ and $5$, inclusive? (2017 AMC 10A).
+\end{problem}
+\begin{problem}[HM35]
+    Consider polynomials $P(x)$ of degree at most $3$, each of whose coefficients is an element of $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$. How many such polynomials satisfy $P(-1) = -9$? (2018 AMC 12B).
+\end{problem}
+\begin{problem}[35]
+    How many integers between $100$ and $999$, inclusive, have the property that some permutation of its digits is a multiple of $11$ between $100$ and $999?$ For example, both $121$ and $211$ have this property. (2017 AMC 10A).
+\end{problem}
+\begin{problem}[40 (HM35)]
+    Jason rolls three fair standard six-sided dice. Then he looks at the rolls and chooses a subset of the dice (possibly empty, possibly all three dice) to reroll. After rerolling, he wins if and only if the sum of the numbers face up on the three dice is exactly $7.$ Jason always plays to optimize his chances of winning. What is the probability that he chooses to reroll exactly two of the dice? (2020 AMC 12A).
+    \begin{remark}
+        This is HM35 if you know anything about combinatorial game theory.
+    \end{remark}
+\end{problem}
+\begin{problem}[HM35]
+    A set of $n$ people participate in an online video basketball tournament. Each person may be a member of any number of $5$-player teams, but no two teams may have exactly the same $5$ members. The site statistics show a curious fact: The average, over all subsets of size $9$ of the set of $n$ participants, of the number of complete teams whose members are among those $9$ people is equal to the reciprocal of the average, over all subsets of size $8$ of the set of $n$ participants, of the number of complete teams whose members are among those $8$ people. How many values $n$, $9\leq n\leq 2017$, can be the number of participants? (2017 AMC 12B).
+\end{problem}
+\begin{problem}[40]
+    Let $S$ be the set of all ordered triple of integers $(a_1,a_2,a_3)$ with $1 \le a_1,a_2,a_3 \le 10$. Each ordered triple in $S$ generates a sequence according to the rule $a_n=a_{n-1}\cdot | a_{n-2}-a_{n-3} |$ for all $n\ge 4$. Find the number of such sequences for which $a_n=0$ for some $n$. (2015 AIME I)
+\end{problem}
+\begin{problem}[HM40]
+    Let $S$ be the set of positive integer divisors of $20^9.$ Three numbers are chosen independently and at random with replacement from the set $S$ and labeled $a_1,a_2,$ and $a_3$ in the order they are chosen. The probability that both $a_1$ divides $a_2$ and $a_2$ divides $a_3$ is $\tfrac{m}{n},$ where $m$ and $n$ are relatively prime positive integers. Find $m.$ (2020 AIME I).
+\end{problem}
+\begin{problem}[40]
+    A circle is divided into 432 congruent arcs by 432 points. The points are colored in four colors such that some 108 points are colored Red, some 108 points are colored Green, some 108 points are colored Blue, and the remaining 108 points are colored Yellow. Prove that one can choose three points of each color in such a way that the four triangles formed by the chosen points of the same color are congruent. (2012 USAMO)
+\end{problem}
+\begin{problem}[45]
+    We say that a finite set $\mathcal{S}$ in the plane is balanced if, for any two different points $A$, $B$ in $\mathcal{S}$, there is a point $C$ in $\mathcal{S}$ such that $AC=BC$. We say that $\mathcal{S}$ is centre-free if for any three points $A$, $B$, $C$ in $\mathcal{S}$, there is no point $P$ in $\mathcal{S}$ such that $PA=PB=PC$.
+\begin{enumerate}
+    \item Show that for all integers $n\geq 3$, there exists a balanced set consisting of $n$ points.
+    \item Determine all integers $n\geq 3$ for which there exists a balanced centre-free set consisting of $n$ points. (2015 IMO).
+\end{enumerate}
+\end{problem}
+\begin{problem}[45]
+    For each positive integer $n$, the Bank of Cape Town issues coins of denomination $\tfrac{1}{n}$. Given a finite collection of such coins (of not necessarily different denominations) with total value at most $99+\tfrac{1}{2}$, prove that it is possible to split this collection into $100$ or fewer groups, such that each group has total value at most $1$. (2014 IMO).
+\end{problem}
+\begin{problem}[45]
+    Let $\mathcal{S}$ be a finite set of at least two points in the plane. Assume that no three points of $\mathcal S$ are collinear. A windmill is a process that starts with a line $\ell$ going through a single point $P \in \mathcal S$. The line rotates clockwise about the pivot $P$ until the first time that the line meets some other point belonging to $\mathcal S$. This point, $Q$, takes over as the new pivot, and the line now rotates clockwise about $Q$, until it next meets a point of $\mathcal S$. This process continues indefinitely. Show that we can choose a point $P$ in $\mathcal S$ and a line $\ell$ going through $P$ such that the resulting windmill uses each point of $\mathcal S$ as a pivot infinitely many times. (2011 IMO).
+    \begin{remark}
+        For a really good way of tackling this problem, see \url{https://www.youtube.com/watch?v=M64HUIJFTZM} (yes, it's 3Blue1Brown again).
+    \end{remark}
+\end{problem}
+\begin{problem}[HM45]
+    Generate a perfect strategy for tic-tac-toe, such that the first player ($X$), always wins. If no such strategy exists, prove that a perfect strategy can only result in a win or a draw.
+\end{problem}
+\end{document}
