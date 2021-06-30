@@ -69,12 +69,14 @@
 
       <div class="periodical">
       {% if entry.type == "article" %}
-        <em>{{entry.journal}}</em>
+        <em>{{entry.journal}}.</em>
       {% elsif entry.type == "inproceedings" %}
-        <em>In {{entry.booktitle}}</em>
+        <em>In {{entry.booktitle}}.</em>
       {% endif %}
       {% if entry.year %}
-        {{entry.year}}
+        {{entry.year}}.
+      {% if entry.doi %}
+        doi.org/{{entry.doi}}.
       {% endif %}
       </div>
     {% endif %}
@@ -98,6 +100,14 @@
       {% else %}
       <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button" target="_blank">PDF</a>
       {% endif %}
+    {% endif %}
+    {% if entry.acl %}
+      {% if entry.acl contains '://' %}
+      <a href="{{ entry.acl }}" class="btn btn-sm z-depth-0" role="button" target="_blank">ACL</a>
+    {% endif %}
+    {% if entry.slides %}
+      <a href="{{ entry.slides }}" class="btn btn-sm z-depth-0" role="button" target="_blank">SLIDES</a>
+    {% endif %}
     {% endif %}
     {% if entry.supp %}
       {% if entry.supp contains '://' %}
