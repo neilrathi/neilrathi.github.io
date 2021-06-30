@@ -2,12 +2,12 @@
 layout: about
 title: about
 permalink: /
-description: नील राठी | Information-Theoretic Psycholinguist
+description: नील राठी | firstlast at gmail
 
 profile:
   align: right
   image: 
-  address: firstlast \[at\] gmail
+  address: 
 
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
