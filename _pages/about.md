@@ -6,8 +6,8 @@ description: नील राठी | Information-Theoretic Psycholinguist
 
 profile:
   align: right
-  image: prof_pic.jpg
-  address:
+  image: 
+  address: firstlast \[at\] gmail
 
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
@@ -18,6 +18,6 @@ I'm a psycholinguist and junior at Palo Alto High School. My research interests 
 
 Outside of research, I like to play music (sitar and trumpet), learn languages (mostly dead ones), work on language documentation, and take photos sometimes. I also take [notes](projects/notes.html).
 
-My name is pronounced /n̪iːl ɽɑtʰiː/. The ⟨th⟩ refers to an aspirated retroflex stop /ʈʰ/, rather than a dental fricative /θ/, but you can pronounce it however is easiest
+My name is roughly pronounced /n̪iːl ɽɑʈʰiː/. The ⟨th⟩ refers to an aspirated retroflex stop /ʈʰ/, rather than a dental fricative /θ/, but you can pronounce it however is easiest.
 
-This website is set in Juan Pablo del Peral's *Alegreya Sans*, a humanist sans-serif font, with headers in Victor Gaultney's humanist-transitional *Gentium Book Basic*.
+This website is typeset in Indian Type Foundry's *Hind*, a humanist sans-serif font with Devanagari support. Headers are headers set in Victor Gaultney's humanist-transitional *Gentium Book Basic*.
