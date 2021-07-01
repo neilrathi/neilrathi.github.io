@@ -17,7 +17,7 @@ Outside of research, I like to play music (sitar and trumpet), learn languages (
 
 My name is roughly pronounced /n̪iːl ɽɑʈʰiː/. The ⟨th⟩ refers to an aspirated retroflex stop /ʈʰ/, rather than a dental fricative /θ/, but you can pronounce it however is easiest. Etymologically
 
-This website is typeset in Indian Type Foundry's *Hind*, a humanist sans-serif font with Devanagari support. Headers are headers set in Victor Gaultney's humanist-transitional *Gentium Book Basic*.
+This website is typeset in Khaled Hosny's transitional *Libertinus Serif*, a fork of Philipp H. Poll's *Linux Libertine*. Headers are set in the humanist sans-serif *Libertinus Sans*, forked from *Linux Biolinum*.
 
 ## Contact
 You can reach me via email at "firstlast [at] gmail." Alternatively, you can find me online on
