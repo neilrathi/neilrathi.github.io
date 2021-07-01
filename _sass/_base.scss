@@ -4,10 +4,11 @@
 
 // Typography
 
-@import url('https://fonts.googleapis.com/css2?family=Hind&family=Gentium+Book+Basic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;700&family=Gentium+Book+Basic&display=swap');
 
 body {
   font-family: "Hind", sans-serif;
+  font-weight: 400;
   font-size: 18px
 }
 
@@ -17,6 +18,10 @@ h1, h2, h3, h4, h5, h6 {
 
 p, h1, h2, h3, h4, h5, h6, em, div, span, strong {
   color: var(--global-text-color);
+}
+
+strong {
+  font-weight: 700
 }
 
 article div {
