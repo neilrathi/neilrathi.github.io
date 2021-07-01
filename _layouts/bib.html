@@ -16,7 +16,7 @@
     {% if entry.type == "thesis" %}
       {{reference}}
     {% else %}
-      <div class="title">{{entry.title}}</div>
+    <div class="title"><strong>{{entry.title}}</strong></div>
       <div class="author">
         {% for author in entry.author_array %}
           {% assign author_is_self = false %}
@@ -37,14 +37,14 @@
           
           {% if forloop.length == 1 %}
             {% if author_is_self %}
-              <em>{{author.last}}, {{author.first}}</em>
+              {{author.last}}, {{author.first}}
             {% else %}
               {{author.last}}, {{author.first}}
             {% endif %}
           {% else %}
             {% unless forloop.last %}
               {% if author_is_self %}
-                <em>{{author.last}}, {{author.first}}</em>,
+                {{author.last}}, {{author.first}},
               {% else %}
                 {% if coauthor_url %}
                   <a href="{{coauthor_url}}" target="_blank">{{author.last}}, {{author.first}}</a>,
@@ -54,7 +54,7 @@
               {% endif %}
             {% else %}
               {% if author_is_self %}
-                and <em>{{author.last}}, {{author.first}}</em>
+                and {{author.last}}, {{author.first}}
               {% else %}
                 {% if coauthor_url %}
                   and <a href="{{coauthor_url}}" target="_blank">{{author.last}}, {{author.first}}</a>
@@ -72,12 +72,6 @@
         <em>{{entry.journal}}.</em>
       {% elsif entry.type == "inproceedings" %}
         <em>In {{entry.booktitle}}.</em>
-      {% endif %}
-      {% if entry.year %}
-        {{entry.year}}.
-      {% endif %}
-      {% if entry.doi %}
-        doi.org/{{entry.doi}}.
       {% endif %}
       </div>
     {% endif %}
