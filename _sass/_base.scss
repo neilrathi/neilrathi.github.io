@@ -7,23 +7,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;700&family=Gentium+Book+Basic&display=swap');
 
 @font-face {
-  font-family: "Libertinus Sans";
+  font-family: "Libertinus Sans Regular";
   src: url("../assets/fonts/LibertinusSans-Regular.otf");
 }
 
 @font-face {
-  font-family: "Libertinus Serif";
+  font-family: "Libertinus Serif Regular";
   src: url("../assets/fonts/LibertinusSerif-Regular.otf");
 }
 
 body {
-  font-family: "Libertinus Sans", sans-serif;
+  font-family: "Libertinus Sans Regular", sans-serif;
   font-weight: 400;
   font-size: 18px
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Libertinus Serif", serif
+  font-family: "Libertinus Serif Regular", serif
 }
 
 p, h1, h2, h3, h4, h5, h6, em, div, span, strong {
