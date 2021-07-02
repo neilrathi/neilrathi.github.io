@@ -12,17 +12,41 @@
 }
 
 @font-face {
+  font-family: "Libertinus Sans Italic";
+  src: url("/assets/fonts/LibertinusSans-Italic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Libertinus Sans Bold";
+  src: url("/assets/fonts/LibertinusSans-Bold.otf") format("opentype");
+}
+
+@font-face {
   font-family: "Libertinus Serif Regular";
   src: url("/assets/fonts/LibertinusSerif-Regular.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Libertinus Serif Italic";
+  src: url("/assets/fonts/LibertinusSerif-Italic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Libertinus Serif Bold";
+  src: url("/assets/fonts/LibertinusSerif-Bold.otf") format("opentype");
+}
+
 body {
-  font-family: "Libertinus Sans Regular", "Hind", sans-serif;
+  font-family: "Libertinus Serif Regular", "Gentium Book Basic", serif;
   font-size: 18px
 }
 
+i, em {
+  font-family: "Libertinus Serif Italic";
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Libertinus Serif Regular", "Gentium Book Basic", serif
+  font-family: "Libertinus Sans Regular", "Hind", sans-serif;
 }
 
 p, h1, h2, h3, h4, h5, h6, em, div, span, strong {
@@ -30,7 +54,7 @@ p, h1, h2, h3, h4, h5, h6, em, div, span, strong {
 }
 
 strong {
-  font-weight: 700
+  font-family: "Libertinus Serif Bold";
 }
 
 article div {
