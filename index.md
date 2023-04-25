@@ -2,122 +2,28 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+# about
 
-[Link to another page](./another-page.html).
+hi! i'm a freshman at stanford broadly interested in mathematical approaches to cognition.
 
-There should be whitespace between paragraphs.
+more specifically, i do modeling work on language processing & production in humans and machines, with the long(er) term goal of building better computational language models ([google scholar](https://scholar.google.com/citations?user=9r4-IukAAAAJ&hl=en)).
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+you can find some form of a CV [here](./assets/vitae.pdf) if you're into that.
 
-# Header 1
+outside of research, i do a lot, but i assume that's not why you're here. ask me about my spotify stats! or anything in general i really do just like talking.
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+you also might just be here for my [notes](./notes.html).
 
-## Header 2
+### some publications
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+**Neil Rathi**, Michael Hahn, and Richard Futrell (2022). Explaining patterns of fusion in morphological paradigms using the memory–surprisal tradeoff. _Proceedings of the 44th Annual Meeting of the Cognitive Science Society (CogSci)_. **Sayan Gul Best Undergrad Paper.** \[[pdf](https://escholarship.org/content/qt0v03z6xb/qt0v03z6xb.pdf)\]
 
-### Header 3
+**Neil Rathi**, Michael Hahn, and Richard Futrell (2021). An information-theoretic characterization of morphological fusion. _Proceedings of Empirical Methods in Natural Language Processing (EMNLP)_. **SIGTYP Best Paper** \[[pdf](https://aclanthology.org/2021.emnlp-main.793.pdf)\]
 
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
+**Neil Rathi** (2021). Dependency Locality and Neural Surprisal as Predictors of Processing Difficulty: Evidence from Reading Times. _Proceedings of the Workshop on Cognitive Modeling and Computational Linguistics (CMCL)_. \[[pdf](https://www.aclweb.org/anthology/2021.cmcl-1.21.pdf)\]
 
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
+### colophon\*
 
-#### Header 4
+this website is on it's like eighth iteration even though i have no real justification for that. it uses jekyll, github pages, and noto sans. it leaves much to be desired.
 
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
+\*i am pretentious
