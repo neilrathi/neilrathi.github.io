@@ -6,9 +6,7 @@ layout: default
 
 hi! i'm a freshman at stanford broadly interested in mathematical approaches to cognition.
 
-more specifically, i do modeling work on language processing & production in humans and machines, with the long(er) term goal of building better computational language models ([google scholar](https://scholar.google.com/citations?user=9r4-IukAAAAJ&hl=en)).
-
-you can find some form of a CV [here](./assets/vitae.pdf) if you're into that.
+more specifically, i do modeling work on language processing & production in humans and machines, with the long(er) term goal of building better computational language models ([google scholar](https://scholar.google.com/citations?user=9r4-IukAAAAJ&hl=en)) ([cv](./assets/vitae.pdf)).
 
 outside of research, i like music, the california coast, and [music about the california coast](https://open.spotify.com/track/27ytYULTu6QSZBhGaOKq9i?si=8180e48578264a2a). you also might just be here for my [notes](./notes.html).
 
