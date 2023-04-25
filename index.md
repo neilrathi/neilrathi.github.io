@@ -10,9 +10,7 @@ more specifically, i do modeling work on language processing & production in hum
 
 you can find some form of a CV [here](./assets/vitae.pdf) if you're into that.
 
-outside of research, i do a lot, but i assume that's not why you're here. ask me about my spotify stats! or anything in general i really do just like talking.
-
-you also might just be here for my [notes](./notes.html).
+outside of research, i like music, the california coast, and [music about the california coast](https://open.spotify.com/track/27ytYULTu6QSZBhGaOKq9i?si=8180e48578264a2a). you also might just be here for my [notes](./notes.html).
 
 ### some publications
 
@@ -20,10 +18,8 @@ you also might just be here for my [notes](./notes.html).
 
 **Neil Rathi**, Michael Hahn, and Richard Futrell (2021). An information-theoretic characterization of morphological fusion. _Proceedings of Empirical Methods in Natural Language Processing (EMNLP)_. **SIGTYP Best Paper** \[[pdf](https://aclanthology.org/2021.emnlp-main.793.pdf)\]
 
-**Neil Rathi** (2021). Dependency Locality and Neural Surprisal as Predictors of Processing Difficulty: Evidence from Reading Times. _Proceedings of the Workshop on Cognitive Modeling and Computational Linguistics (CMCL)_. \[[pdf](https://www.aclweb.org/anthology/2021.cmcl-1.21.pdf)\]
-
 ### colophon\*
 
-this website is on it's like eighth iteration even though i have no real justification for that. it uses jekyll, github pages, and noto sans. it leaves much to be desired.
+this website is on it's like eighth iteration even though i have no real justification for that. it uses the jekyll [minimal](https://github.com/orderedlist/minimal) theme, github pages, and noto sans. it leaves much to be desired.
 
 \*i am pretentious
