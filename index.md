@@ -18,6 +18,6 @@ outside of research, i like music, the california coast, and [music about the ca
 
 ### colophon\*
 
-this website is on it's like eighth iteration even though i have no real justification for that. it uses the jekyll [minimal](https://github.com/orderedlist/minimal) theme, github pages, and noto sans. it leaves much to be desired.
+this website is on its like eighth iteration even though i have no real justification for that. it uses the jekyll [minimal](https://github.com/orderedlist/minimal) theme, github pages, and noto sans. it leaves much to be desired.
 
 \*i am pretentious

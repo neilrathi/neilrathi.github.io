@@ -12,3 +12,5 @@ i write a lot of notes! or at least i have this idea in my head that i do. for s
 ## high school (extra pretentious)
 * ap physics mechanics \[[pdf](./assets/notes/APPhysicsMech.pdf)\] \[[tex](./assets/notes/APPhysicsMech.tex)\]
 * ap physics e&m \[[pdf](./assets/notes/APPhysicsEM.pdf)\] \[[tex](./assets/notes/APPhysicsEM.tex)\]
+
+go back [home](https://neilrathi.github.io/)
