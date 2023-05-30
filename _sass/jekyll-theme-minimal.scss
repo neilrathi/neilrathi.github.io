@@ -1,10 +1,9 @@
-@import "fonts";
 @import "rouge-github";
 
 body {
   background-color: #fff;
   padding:50px;
-  font: 14px/1.5 "Noto Sans", Arial, sans-serif;
+  font: 14px/1.5 Georgia, serif;
   color:#727272;
   font-weight:400;
 }
@@ -24,6 +23,7 @@ h1, h2, h3 {
 
 h1 {
   font-size:28px;
+  font-weight: normal;
 }
 
 h2 {
@@ -40,7 +40,7 @@ a {
 }
 
 a:hover, a:focus {
-  color:#069;
+  color:#044291;
 }
 
 a small {
@@ -51,11 +51,11 @@ a small {
 }
 
 a:hover small {
-  color:#777;
+  color:#044291;
 }
 
 .wrapper {
-  width:860px;
+  width:760px;
   margin:0 auto;
 }
 
@@ -118,7 +118,7 @@ kbd {
 }
 
 header {
-  width:270px;
+  width:140px;
   float:left;
   position:fixed;
   -webkit-font-smoothing:subpixel-antialiased;
@@ -185,7 +185,7 @@ strong {
 }
 
 section {
-  width:500px;
+  width:550px;
   float:right;
   padding-bottom:50px;
 }
