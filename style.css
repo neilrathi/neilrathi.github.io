@@ -1,0 +1,209 @@
+body {
+  font: 14px/1.5 'Helvetica', 'Arial', sans-serif;
+  max-width: 390px;
+  margin: 50px;
+  padding: 0 1rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  body {
+    box-sizing: border-box;
+    margin: 0 0 0 150px;
+    padding: 50px 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: safe center;
+  }
+
+  body.top {
+    justify-content: flex-start;
+    padding-top: 100px;
+  }
+}
+
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 14px; margin: 0;
+}
+
+a {
+  color: #22558e;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.about {
+  margin-bottom: 2rem;
+}
+
+.about p:last-child {
+  margin-bottom: 0;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.links li {
+  padding: 2px 0;
+}
+
+.photo {
+  max-width: 390px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.photo p {
+  font-style: italic;
+  text-align:right;
+  margin-top: 0.25rem;
+  font-size: 12px;
+}
+
+.writing-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.writing-table td {
+  font-weight: normal;
+  text-align: left;
+  vertical-align: baseline;
+  padding: 2px 0;
+  white-space: nowrap;
+  width: 1%;
+}
+
+.writing-table td:first-child {
+  font-style: italic;
+  width: 100%;
+  white-space: normal;
+}
+
+.writing-table td + td {
+  padding-left: 1.5rem;
+}
+
+.essay {
+  max-width: 550px;
+}
+
+.essay h1 {
+  margin: 0 0 0.25rem;
+}
+
+.essay .date {
+  font-size: 12px;
+  margin: 0 0 2rem;
+}
+
+.essay h2 {
+  font-size: 14px;
+  margin: 2rem 0 0.5rem;
+}
+
+.essay h3 {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: italic;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.essay blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid #ddd;
+}
+
+/* tufte-style sidenotes: numbered marker in the text, note in the right margin.
+   the note is revealed on hover; clicking the number pins it open. narrow
+   screens have no margin to spare, so the note opens inline instead. */
+.essay .sidenote-number {
+  font-size: 10px;
+  line-height: 0;
+  vertical-align: super;
+  color: #22558e;
+  cursor: pointer;
+}
+
+.essay .sidenote-number:hover {
+  text-decoration: underline;
+}
+
+.essay .sidenote-toggle {
+  display: none;
+}
+
+.essay .sidenote {
+  display: none;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.essay .sidenote .sidenote-number {
+  cursor: default;
+  color: inherit;
+}
+
+/* narrow: no room in the margin, so open the note in the flow on tap */
+@media (max-width: 999px) {
+  .essay .sidenote-toggle:checked + .sidenote {
+    display: block;
+    margin: 0.75rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid #ddd;
+  }
+}
+
+/* wide: park the note in the right margin, level with its number.
+   `top` stays auto so it keeps its static position on the line. */
+@media (min-width: 1000px) {
+  .essay article {
+    position: relative;
+  }
+
+  .essay .sidenote {
+    display: block;
+    position: absolute;
+    left: 100%;
+    width: 240px;
+    padding-left: 2rem;  /* bridges the gutter so hover survives the trip */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s ease-in;
+  }
+
+  .essay .sidenote-number:hover + .sidenote-toggle + .sidenote,
+  .essay .sidenote-toggle:checked + .sidenote,
+  .essay .sidenote:hover {
+    visibility: visible;
+    opacity: 1;
+  }
+}
